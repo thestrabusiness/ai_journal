@@ -1,0 +1,17 @@
+<div id="<%= dom_id journal_entry %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Content:</strong>
+    <%= journal_entry.content %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Title:</strong>
+    <%= journal_entry.title %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this journal entry", journal_entry, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this journal entry', edit_journal_entry_path(journal_entry), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
