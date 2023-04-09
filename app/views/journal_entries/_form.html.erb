@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :content %>
-    <%= form.rich_text_area :content, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+  <%= form.text_field :title,
+    placeholder: Date.today.strftime("%B %-d, %Y"),
+    class: "block rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-1" %>
 
-  <div class="my-5">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="py-5">
+    <%= form.rich_text_area :content,
+      placeholder: "What's on your mind?",
+      class:"block rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-1" %>
   </div>
 
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit "Save", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
