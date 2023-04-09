@@ -21,6 +21,9 @@ module.exports = {
       animation: {
         "slide-down-up": "slide-down-up 3s ease-in-out forwards",
       },
+      width: {
+        "ai-menu": "35rem",
+      },
     },
   },
   plugins: [

@@ -29,6 +29,13 @@
         <% end %>
       </div>
       <%= yield %>
+      <div
+        data-controller="ai-menu"
+        class="h-full my-5 ml-5 p-5 transition-all w-20 item-center bg-white rounded-l-lg shadow-md">
+        <i data-feather="message-square"
+           data-ai-menu-target="button"
+           class="h-8 w-8 mb-8"></i>
+      </div>
     </main>
   </body>
 </html>
