@@ -1,28 +1,12 @@
-<%= form_with(model: journal_entry, class: "contents") do |form| %>
-  <% if journal_entry.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(journal_entry.errors.count, "error") %> prohibited this journal_entry from being saved:</h2>
-
-      <ul>
-        <% journal_entry.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_with(model: journal_entry, class: "flex flex-col h-full") do |form| %>
   <%= form.text_field :title,
     placeholder: journal_entry.display_title,
-    class: "block rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-1" %>
+    class: "rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-1 mb-1" %>
 
-  <div class="py-5">
-    <%= form.rich_text_area :content,
-      placeholder: "What's on your mind?",
-      class:"block rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-1" %>
-  </div>
+  <%= form.rich_text_area :content,
+    placeholder: "What's on your mind?",
+    class:"flex-1 resize-none rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-5 overflow-y-scroll mb-3" %>
 
-  <div class="inline">
-    <%= form.submit "Save",
-      class: "rounded-lg py-3 px-5 bg-blue-200 inline-block font-medium cursor-pointer" %>
-  </div>
+  <%= form.submit "Save",
+    class: "rounded-lg py-3 px-5 bg-blue-200 inline-block font-medium cursor-pointer" %>
 <% end %>
