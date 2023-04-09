@@ -5,12 +5,12 @@
 @tailwind utilities;
 
 @layer components {
-  .right-panel-container {
+  .main-panel-container {
     @apply h-full w-full
   }
 
-  .right-panel-full {
-    @apply right-panel-container white-panel mt-5
+  .main-panel-full {
+    @apply main-panel-container white-panel mt-5
   }
 
   .white-panel {
