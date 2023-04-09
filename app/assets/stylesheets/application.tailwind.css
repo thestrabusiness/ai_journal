@@ -14,4 +14,16 @@
   .white-panel {
     @apply rounded-lg bg-white shadow-md p-5
   }
+
+  .chat-bubble {
+    @apply rounded-lg text-white shadow-md p-3 mb-3 relative
+  }
+
+  .user-chat-bubble {
+    @apply chat-bubble bg-slate-500 ml-6
+  }
+
+  .ai-chat-bubble {
+    @apply chat-bubble bg-slate-700 mr-6
+  }
 }

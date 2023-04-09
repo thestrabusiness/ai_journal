@@ -22,7 +22,7 @@ module.exports = {
         "slide-down-up": "slide-down-up 3s ease-in-out forwards",
       },
       width: {
-        "ai-menu": "35rem",
+        "ai-menu": "40rem",
       },
     },
   },

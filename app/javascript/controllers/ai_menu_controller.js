@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["button"];
+  static targets = ["button", "content"];
 
   connect() {
     this.isOpen = false;
@@ -34,10 +34,12 @@ export default class extends Controller {
   openModal() {
     this.element.classList.add("w-ai-menu");
     this.element.classList.remove("w-20");
+    this.contentTarget.classList.toggle("opacity-0");
   }
 
   closeModal() {
     this.element.classList.add("w-20");
     this.element.classList.remove("w-ai-menu");
+    this.contentTarget.classList.toggle("opacity-0");
   }
 }
