@@ -3,3 +3,8 @@ import "@hotwired/turbo-rails";
 import "trix";
 import "@rails/actiontext";
 import "controllers";
+import feather from "feather-icons";
+
+document.addEventListener("turbo:load", () => {
+  feather.replace();
+});

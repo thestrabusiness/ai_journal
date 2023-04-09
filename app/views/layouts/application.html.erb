@@ -20,9 +20,13 @@
       </div>
     <% end %>
     <main class="flex h-full items-start">
-      <div class="flex flex-col h-full my-5 mr-5 p-5 w-20 items-center bg-white rounded-r-lg shadow-xl">
-        <%= link_to "Home", root_path, class: "h-5 mb-5" %>
-        <%= link_to "Entries", journal_entries_path, class: "h-5 mb-5" %>
+      <div class="flex flex-col h-full my-5 mr-5 p-5 w-20 items-center bg-white rounded-r-lg shadow-lg">
+        <%= link_to root_path, class: "mb-8" do %>
+          <i data-feather="edit-3" class="h-8 w-8"></i>
+        <% end %>
+        <%= link_to journal_entries_path, class: "mb-8" do %>
+          <i data-feather="book-open" class="h-8 w-8"></i>
+        <% end %>
       </div>
       <%= yield %>
     </main>
