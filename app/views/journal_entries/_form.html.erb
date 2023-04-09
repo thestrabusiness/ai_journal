@@ -12,7 +12,7 @@
   <% end %>
 
   <%= form.text_field :title,
-    placeholder: Date.today.strftime("%B %-d, %Y"),
+    placeholder: journal_entry.display_title,
     class: "block rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-1" %>
 
   <div class="py-5">

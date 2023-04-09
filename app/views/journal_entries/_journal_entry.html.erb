@@ -1,7 +1,7 @@
 <%= link_to journal_entry_path(journal_entry)do %>
   <div class="mb-5 white-panel">
     <div class="mb-5 text-2xl">
-      <%= journal_entry.title.presence || journal_entry.created_at.strftime("%B %-d, %Y") %>
+      <%= journal_entry.display_title %>
     </div>
 
     <p>
