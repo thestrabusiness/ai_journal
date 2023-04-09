@@ -14,6 +14,8 @@
  *= require_self
  */
 
+@import 'actiontext.css';
+
 trix-toolbar {
   display: none;
 }
