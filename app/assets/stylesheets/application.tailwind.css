@@ -10,10 +10,10 @@
   }
 
   .right-panel-full {
-    @apply right-panel-container white-panel
+    @apply right-panel-container white-panel mt-5
   }
 
   .white-panel {
-    @apply rounded-l-lg bg-white shadow-lg p-5 my-5
+    @apply rounded-lg bg-white shadow-md p-5 mr-5
   }
 }

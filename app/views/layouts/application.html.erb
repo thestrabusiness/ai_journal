@@ -14,13 +14,13 @@
   <body class="fixed inset-0 bg-gray-100 mb-10 <%= "animate-slide-down-up" if notice.present? %>">
     <% if notice.present? %>
       <div
-        class="flex w-full items-center justify-center h-14 bg-green-200 text-green-600 rounded-b-lg shadow-lg"
+        class="flex w-full items-center justify-center h-14 bg-green-200 text-green-600 rounded-b-lg shadow-md"
         id="notice">
         <%= notice %>
       </div>
     <% end %>
     <main class="flex h-full items-start">
-      <div class="flex flex-col h-full my-5 mr-5 p-5 w-20 items-center bg-white rounded-r-lg shadow-lg">
+      <div class="flex flex-col h-full my-5 mr-5 p-5 w-20 items-center bg-white rounded-r-lg shadow-md">
         <%= link_to root_path, class: "mb-8" do %>
           <i data-feather="edit-3" class="h-8 w-8"></i>
         <% end %>
