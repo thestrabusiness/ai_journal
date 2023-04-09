@@ -14,6 +14,6 @@
   }
 
   .white-panel {
-    @apply rounded-l-lg bg-white shadow p-5 my-5
+    @apply rounded-l-lg bg-white shadow-lg p-5 my-5
   }
 }
