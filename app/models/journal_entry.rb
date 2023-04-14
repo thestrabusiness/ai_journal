@@ -1,4 +1,6 @@
 class JournalEntry < ApplicationRecord
+  has_many :chat_logs, dependent: :destroy
+
   has_rich_text :content
 
   def display_title

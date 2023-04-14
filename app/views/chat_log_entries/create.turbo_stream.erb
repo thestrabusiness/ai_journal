@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "chat-entries" do %>
+  <%= render partial: "chat_logs/entry", collection: @chat_log.entries_for_display, as: :entry %>
+<% end %>
+<%= turbo_stream.replace "#{dom_id(@chat_log)}-form" do %>
+  <%= render "chat_log_entries/form", chat_log: @chat_log %>
+<% end %>

@@ -29,27 +29,7 @@
         <% end %>
       </div>
       <%= yield %>
-      <div
-        data-controller="ai-menu"
-        class="h-full my-5 ml-5 p-5 transition-all w-20 item-center bg-white rounded-l-lg shadow-md">
-        <i data-feather="message-square"
-           data-ai-menu-target="button"
-           class="h-8 w-8 mb-8"></i>
-        <div class="transition-opacity opacity-0 text-clip overflow-hidden whitespace-nowrap" data-ai-menu-target="content">
-          <div class="user-chat-bubble">
-            Hi, Ai. I need help journaling
-          </div>
-          <div class="ai-chat-bubble">
-            Hi, I'm Ai. I'm here to help you journal.
-          </div>
-          <div class="user-chat-bubble">
-            What are you thoughts on journaling?
-          </div>
-          <div class="ai-chat-bubble">
-            I think journaling is a great way to reflect on your day.
-          </div>
-        </div>
-      </div>
+      <%= render "chat_logs/sidebar", locals: { chat_log: @chat_log } %>
     </main>
   </body>
 </html>

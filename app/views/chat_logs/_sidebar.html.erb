@@ -1,0 +1,13 @@
+<div
+  data-controller="ai-menu"
+  class="h-full relative my-5 ml-5 p-5 transition-all w-20 item-center bg-white rounded-l-lg shadow-md">
+  <i data-feather="message-square"
+     data-ai-menu-target="button"
+     class="h-8 w-8 mb-8"></i>
+  <div class="transition-opacity opacity-0" data-ai-menu-target="content">
+    <div class="text-clip overflow-hidden whitespace-nowrap" id="chat-entries">
+      <%= render partial: "chat_logs/entry", collection: @chat_log.entries_for_display, as: :entry %>
+    </div>
+    <%= render "chat_log_entries/form", chat_log: @chat_log %>
+  </div>
+</div>
