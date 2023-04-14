@@ -1,10 +1,11 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["button", "content"];
+  static targets = ["button", "content", "entries"];
 
   connect() {
     this.isOpen = false;
+    this.entriesTarget.scrollTop = this.entriesTarget.scrollHeight;
     this.handleToggleMenu = this.toggleMenu.bind(this);
     this.addEventListeners();
     document.addEventListener("turbo:load", () => {
