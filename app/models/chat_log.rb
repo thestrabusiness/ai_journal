@@ -10,12 +10,8 @@ class ChatLog < ApplicationRecord
   end
 
   def add_user_entry(content)
-    conversation_entries << {
-      'role' => 'user',
-      'content' => content,
-      'created_at' => Time.current.to_s
-    }
-    save!
+    add_entry('user', content)
+    fetch_assistant_response
   end
 
   def entries_for_display
@@ -24,23 +20,56 @@ class ChatLog < ApplicationRecord
       .reject { |entry| entry['role'] == 'system' }
   end
 
-  def serialize_conversation_entries
-    conversation_entries.map do |entry|
-      {
-        content: entry['content'],
-        role: entry['role']
-      }
-    end
-  end
-
   private
 
-  def set_system_role
+  def add_assistant_response(content)
+    add_entry('assistant', content)
+  end
+
+  def add_entry(role, content)
     conversation_entries << {
-      'role' => 'system',
-      'content' => 'You are a helpful assistant.',
+      'role' => role,
+      'content' => content,
       'created_at' => Time.current.to_s
     }
+    save!
+  end
+
+  def conversation_entries_for_assistant_request
+    conversation_entries
+      .sort_by { |entry| entry['created_at'] }
+      .map do |entry|
+        {
+          content: entry['content'],
+          role: entry['role']
+        }
+      end
+  end
+
+  def entry_valid?(entry)
+    entry.keys.sort == %w[content created_at role] &&
+      entry['role'].is_a?(String) &&
+      entry['content'].is_a?(String) &&
+      Time.parse(entry['created_at']).is_a?(Time)
+  end
+
+  def fetch_assistant_response
+    client = OpenAI::Client.new
+
+    response = client.chat(
+      parameters: {
+        model: 'gpt-3.5-turbo',
+        messages: conversation_entries_for_assistant_request,
+        temperature: 0.7
+      }
+    )
+
+    new_assistant_response = response.dig('choices', 0, 'message', 'content')
+    add_assistant_response(new_assistant_response)
+  end
+
+  def set_system_role
+    add_entry('system', 'You are a helpful assistant.')
   end
 
   def validate_conversation_entries_format
@@ -49,12 +78,5 @@ class ChatLog < ApplicationRecord
         errors.add(:conversation_entries, "Invalid entry format: #{entry.inspect}")
       end
     end
-  end
-
-  def entry_valid?(entry)
-    entry.keys.sort == %w[content created_at role] &&
-      entry['role'].is_a?(String) &&
-      entry['content'].is_a?(String) &&
-      Time.parse(entry['created_at']).is_a?(Time)
   end
 end

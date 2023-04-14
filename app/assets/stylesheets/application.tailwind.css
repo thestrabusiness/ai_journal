@@ -27,3 +27,7 @@
     @apply chat-bubble bg-slate-700 mr-6
   }
 }
+
+.chat-bubble > p:not(:last-child) {
+  @apply mb-3
+}
