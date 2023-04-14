@@ -1,7 +1,7 @@
 <%= form_with model: chat_log,
   data: { controller: "ai-chat-form"},
   id: "#{dom_id(chat_log)}-form",
-  class:"mb-10 p-5 bg-white",
+  class:"mb-10 py-5 bg-white",
   method: :post,
   url: chat_log_entries_path(chat_log) do |form| %>
   <div class="flex">
