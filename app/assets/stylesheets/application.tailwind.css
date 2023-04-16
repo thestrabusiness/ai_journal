@@ -8,7 +8,7 @@
   }
 
   .main-panel-full {
-    @apply main-panel-container white-panel mt-5
+    @apply main-panel-container white-panel mt-5 mr-1.5
   }
 
   .white-panel {
