@@ -6,8 +6,8 @@
      class="h-8 w-8 min-h-[2rem] min-w-[2rem] mb-5"></i>
   <div
     data-ai-menu-target="content"
-    class="h-full flex flex-col transition-opacity opacity-0">
-    <div class="flex-1 minimal-scrollbar" data-ai-menu-target="entries">
+    class="flex-grow grid grid-rows-[1fr,auto] h-0 transition-opacity opacity-0">
+    <div class="minimal-scrollbar" data-ai-menu-target="entries">
       <div id="chat-entries">
         <%= render partial: "chat_logs/entry",
           collection: @chat_log.entries_for_display,
