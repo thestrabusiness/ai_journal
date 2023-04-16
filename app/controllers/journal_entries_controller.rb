@@ -4,7 +4,7 @@ class JournalEntriesController < ApplicationController
 
   # GET /journal_entries
   def index
-    @journal_entries = JournalEntry.all
+    @journal_entries = JournalEntry.order(created_at: :desc)
   end
 
   # GET /journal_entries/1
