@@ -1,0 +1,21 @@
+<div
+  class="white-panel"
+  id="<%= dom_id(journal_entry, :analysis) %>"
+  data-controller="journal-entry-analysis">
+  <div class="grid grid-cols-[1fr,auto]">
+    <div class="text-2xl mb-4">AI Reflection</div>
+    <%= button_to journal_entry_analysis_path(journal_entry_id: journal_entry.id),
+      "data-journal-entry-analysis-target": "button",
+      class: "disabled:cursor-not-allowed disabled:opacity-50",
+      data: analysis_confirmation do %>
+      <i data-feather="zap" class="h-8 w-8 min-h-[2rem] min-w-[2rem]"></i>
+    <% end %>
+  </div>
+  <div class="mb-3" data-journal-entry-analysis-target="content">
+    <% if journal_entry.analysis.present? %>
+      <%= simple_format journal_entry.analysis, class: "mb-3" %>
+    <% else %>
+      <div class="text-gray-500">Press the lightning bolt to start the AI reflection</div>
+    <% end %>
+  </div>
+</div>

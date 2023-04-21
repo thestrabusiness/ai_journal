@@ -11,7 +11,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="fixed inset-0 bg-gray-100 mb-10 <%= "animate-slide-down-up" if notice.present? %>">
+  <body
+    class="fixed inset-0 bg-gray-100 mb-10 <%= "animate-slide-down-up" if notice.present? %>"
+    data-controller="feather-icons">
     <% if notice.present? %>
       <div
         class="flex w-full items-center justify-center h-14 bg-green-200 text-green-600 rounded-b-lg shadow-md"

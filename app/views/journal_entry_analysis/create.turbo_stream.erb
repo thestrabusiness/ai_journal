@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@journal_entry, :analysis) do %>
+  <%= render partial: 'journal_entries/analysis', locals: { journal_entry: @journal_entry } %>
+<% end %>

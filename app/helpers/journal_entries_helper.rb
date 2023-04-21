@@ -7,6 +7,12 @@ module JournalEntriesHelper
     "Longest streak: #{longest_streak} day".pluralize(longest_streak)
   end
 
+  def analysis_confirmation
+    return unless @journal_entry.analysis.present?
+
+    { 'turbo-confirm' => 'This will replace the current AI reflection. Are you sure?' }
+  end
+
   private
 
   def current_streak

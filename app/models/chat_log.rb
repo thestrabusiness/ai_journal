@@ -54,17 +54,7 @@ class ChatLog < ApplicationRecord
   end
 
   def fetch_assistant_response
-    client = OpenAI::Client.new
-
-    response = client.chat(
-      parameters: {
-        model: 'gpt-3.5-turbo',
-        messages: conversation_entries_for_assistant_request,
-        temperature: 0.7
-      }
-    )
-
-    new_assistant_response = response.dig('choices', 0, 'message', 'content')
+    new_assistant_response = FetchChatCompletion.run(conversation_entries_for_assistant_request)
     add_assistant_response(new_assistant_response)
   end
 

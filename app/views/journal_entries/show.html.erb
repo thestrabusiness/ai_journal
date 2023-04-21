@@ -1,3 +1,14 @@
-<div class="main-panel-full">
-  <%= render 'form', journal_entry: @journal_entry %>
+<div class="main-panel-container h-screen py-5 minimal-scrollbar">
+  <div class="white-panel mb-5">
+    <div class="flex flex-row justify-between mb-5">
+        <div class="text-2xl w-fit mr-0">
+          <%= @journal_entry.display_title %>
+        </div>
+        <%= render "controls", journal_entry: @journal_entry %>
+    </div>
+    <div class="mb-4">
+      <%= @journal_entry.content %>
+    </div>
+  </div>
+  <%= render "analysis", journal_entry: @journal_entry %>
 </div>

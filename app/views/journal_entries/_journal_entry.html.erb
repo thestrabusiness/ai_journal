@@ -5,14 +5,7 @@
         <%= journal_entry.display_title %>
       </div>
     <% end %>
-
-    <%= link_to journal_entry_path(journal_entry),
-      data: {
-        "turbo-confirm": "Are you sure you want to delete this entry?",
-        "turbo-method": :delete
-      } do %>
-      <i data-feather="trash" class="h-8 w-8"></i>
-    <% end %>
+    <%= render 'controls', journal_entry: journal_entry %>
   </div>
 
   <%= link_to journal_entry_path(journal_entry) do %>
