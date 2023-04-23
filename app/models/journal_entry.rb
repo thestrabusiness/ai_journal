@@ -1,7 +1,10 @@
 class JournalEntry < ApplicationRecord
   has_many :chat_logs, dependent: :destroy
+  has_many :embeddings, as: :embeddable, dependent: :destroy
 
   has_rich_text :content
+
+  after_save :generate_content_embeddings
 
   def analyze!
     new_analysis = FetchJournalEntryAnalysis.run(self)
@@ -22,5 +25,17 @@ class JournalEntry < ApplicationRecord
 
   def title_with_date
     "#{created_at_string}: #{title}"
+  end
+
+  private
+
+  def generate_content_embeddings
+    embedding_data = FetchEmbeddings.run(content.to_plain_text)
+    embedding_data.each do |data|
+      embeddings.create!(
+        content: data[:chunk_text],
+        embedding: data[:embedding]
+      )
+    end
   end
 end

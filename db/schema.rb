@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_21_124324) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_23_142654) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "vector"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -58,6 +59,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_124324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["journal_entry_id"], name: "index_chat_logs_on_journal_entry_id"
+  end
+
+  create_table "embeddings", force: :cascade do |t|
+    t.text "content", null: false
+    t.vector "embedding", limit: 1536
+    t.string "embeddable_type", null: false
+    t.bigint "embeddable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["embeddable_type", "embeddable_id"], name: "index_embeddings_on_embeddable"
   end
 
   create_table "journal_entries", force: :cascade do |t|
