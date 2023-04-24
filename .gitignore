@@ -27,3 +27,8 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 !/vendor/javascript/.keep
+
+# Ignore credential keys and development credentials
+/config/credentials/production.key
+/config/credentials/development.key
+/config/credentials/development.yml.enc
