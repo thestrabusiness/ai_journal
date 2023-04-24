@@ -34,5 +34,6 @@ module AiJournal
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.active_storage.service = :local
+    config.time_zone = 'Eastern Time (US & Canada)'
   end
 end
