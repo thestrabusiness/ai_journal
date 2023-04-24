@@ -1,14 +1,14 @@
 class JournalEntry < ApplicationRecord
   has_many :chat_logs, dependent: :destroy
-  has_many :embeddings, as: :embeddable, dependent: :destroy
+  has_many :embeddings, dependent: :destroy, class_name: 'JournalEntryEmbedding'
+  has_and_belongs_to_many :people
 
   has_rich_text :content
 
   after_save :generate_content_embeddings
 
   def analyze!
-    new_analysis = FetchJournalEntryAnalysis.run(self)
-    update(analysis: new_analysis)
+    AnalyzeJournalEntry.run(self)
   end
 
   def created_at_string

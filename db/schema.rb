@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_23_142654) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_23_232725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -61,16 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_142654) do
     t.index ["journal_entry_id"], name: "index_chat_logs_on_journal_entry_id"
   end
 
-  create_table "embeddings", force: :cascade do |t|
-    t.text "content", null: false
-    t.vector "embedding", limit: 1536
-    t.string "embeddable_type", null: false
-    t.bigint "embeddable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["embeddable_type", "embeddable_id"], name: "index_embeddings_on_embeddable"
-  end
-
   create_table "journal_entries", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -78,7 +68,48 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_142654) do
     t.text "analysis"
   end
 
+  create_table "journal_entries_people", force: :cascade do |t|
+    t.bigint "journal_entry_id", null: false
+    t.bigint "person_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["journal_entry_id", "person_id"], name: "index_journal_entries_people_on_journal_entry_id_and_person_id", unique: true
+    t.index ["journal_entry_id"], name: "index_journal_entries_people_on_journal_entry_id"
+    t.index ["person_id"], name: "index_journal_entries_people_on_person_id"
+  end
+
+  create_table "journal_entry_embeddings", force: :cascade do |t|
+    t.text "content", null: false
+    t.vector "embedding", limit: 1536
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "journal_entry_id", null: false
+    t.index ["journal_entry_id"], name: "index_journal_entry_embeddings_on_journal_entry_id"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_people_on_name"
+  end
+
+  create_table "relationship_summary_embeddings", force: :cascade do |t|
+    t.text "content", null: false
+    t.vector "embedding", limit: 1536
+    t.bigint "person_id", null: false
+    t.bigint "journal_entry_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["journal_entry_id"], name: "index_relationship_summary_embeddings_on_journal_entry_id"
+    t.index ["person_id"], name: "index_relationship_summary_embeddings_on_person_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chat_logs", "journal_entries"
+  add_foreign_key "journal_entries_people", "journal_entries"
+  add_foreign_key "journal_entries_people", "people"
+  add_foreign_key "journal_entry_embeddings", "journal_entries"
+  add_foreign_key "relationship_summary_embeddings", "people"
 end

@@ -1,5 +1,5 @@
-class Embedding < ApplicationRecord
-  belongs_to :embeddable, polymorphic: true
+class JournalEntryEmbedding < ApplicationRecord
+  belongs_to :journal_entry
 
   has_neighbors :embedding, dimensions: 1536
 
