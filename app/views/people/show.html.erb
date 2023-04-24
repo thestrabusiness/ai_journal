@@ -5,14 +5,16 @@
 
   <div class="mt-5">
     <% @summaries_for_journal_entries.each do |summary| %>
-      <div class="white-panel mb-5">
-        <div class="flex justify-between py-3 text-xl">
-          <%= summary.journal_entry.display_title %>
+      <%= link_to journal_entry_path(summary.journal_entry) do %>
+        <div class="white-panel mb-5">
+          <div class="flex justify-between py-3 text-xl">
+            <%= summary.journal_entry.display_title %>
+          </div>
+          <div>
+            <%= summary.content %>
+          </div>
         </div>
-        <div>
-          <%= summary.content %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
