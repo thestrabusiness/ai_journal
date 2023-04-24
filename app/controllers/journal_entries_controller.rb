@@ -1,6 +1,5 @@
 class JournalEntriesController < ApplicationController
   before_action :set_journal_entry, only: %i[show edit update destroy]
-  before_action :set_chat_log
 
   # GET /journal_entries
   def index
@@ -48,10 +47,6 @@ class JournalEntriesController < ApplicationController
 
   def set_journal_entry
     @journal_entry = JournalEntry.find(params[:id])
-  end
-
-  def set_chat_log
-    @chat_log = ChatLog.first_or_create!
   end
 
   def journal_entry_params

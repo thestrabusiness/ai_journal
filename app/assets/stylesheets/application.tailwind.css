@@ -26,6 +26,10 @@
   .ai-chat-bubble {
     @apply chat-bubble bg-slate-700 mr-6
   }
+
+  .sticky-header {
+    @apply flex sticky top-0 left-0 right-0 justify-between white-panel py-3 text-xl
+  }
 }
 
 .chat-bubble > p:not(:last-child) {

@@ -1,0 +1,18 @@
+<div class="main-panel-container h-screen relative py-5 minimal-scrollbar">
+  <div class="sticky-header">
+    <%= @person.name %>
+  </div>
+
+  <div class="mt-5">
+    <% @summaries_for_journal_entries.each do |summary| %>
+      <div class="white-panel mb-5">
+        <div class="flex justify-between py-3 text-xl">
+          <%= summary.journal_entry.display_title %>
+        </div>
+        <div>
+          <%= summary.content %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

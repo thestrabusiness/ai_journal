@@ -1,0 +1,20 @@
+<div class="main-panel-container h-screen relative py-5 minimal-scrollbar">
+  <div class="sticky-header">
+    People
+  </div>
+
+  <div class="mt-5">
+    <% @people.each do |person| %>
+      <%= link_to person_path(person) do %>
+        <div class="white-panel mb-5">
+          <div class="flex justify-between text-xl mb-4">
+            <%= person.name %>
+          </div>
+          <div>
+            Number of mentions: <%= person.journal_entries.count %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
