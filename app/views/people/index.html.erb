@@ -3,15 +3,15 @@
     People
   </div>
 
-  <div class="mt-5">
+  <div class="flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-5">
     <% @people.each do |person| %>
       <%= link_to person_path(person) do %>
-        <div class="white-panel mb-5">
+        <div class="white-panel">
           <div class="flex justify-between text-xl mb-4">
             <%= person.name %>
           </div>
           <div>
-            Number of mentions: <%= person.journal_entries.count %>
+            Mentions: <%= person.journal_entries.count %>
           </div>
         </div>
       <% end %>
