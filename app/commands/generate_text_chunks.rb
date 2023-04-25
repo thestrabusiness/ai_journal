@@ -19,6 +19,9 @@ class GenerateTextChunks
     # Return an empty list if the text is empty or whitespace
     return [] if text.nil? || text.strip.empty?
 
+    # If the text is shorter than the minimum chunk size, just return the text
+    return [text] if text.size < MIN_CHUNK_SIZE_CHARS
+
     # Tokenize the text
     tokens = tokenizer.encode(text)
 

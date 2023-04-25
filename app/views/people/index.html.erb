@@ -1,6 +1,12 @@
 <div class="main-panel-container h-screen relative py-5 minimal-scrollbar">
-  <div class="sticky-header">
-    People
+  <div class="flex items-center justify-between sticky-header">
+    <div>
+      People
+    </div>
+    <%= form_for :search, url: people_path, method: :get, class: "flex items-center" do |f| %>
+      <%= f.text_field :query, value: @query, class: "h-10 border border-gray-300 rounded-md p-1.5 mr-2", placeholder: "Search people" %>
+      <%= f.submit "Search", class: "bg-blue-300 py-1.5 px-4 rounded cursor-pointer" %>
+    <% end %>
   </div>
 
   <div class="flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-5">
