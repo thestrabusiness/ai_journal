@@ -1,3 +1,9 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+  NewCops: enable
+
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
@@ -9,3 +15,6 @@ Style/FrozenStringLiteralComment:
 
 Style/IfUnlessModifier:
   Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

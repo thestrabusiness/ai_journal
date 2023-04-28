@@ -22,7 +22,7 @@ class JournalEntriesController < ApplicationController
     @journal_entry = JournalEntry.new(journal_entry_params)
 
     if @journal_entry.save
-      redirect_to @journal_entry, notice: 'Journal entry was successfully created.'
+      redirect_to @journal_entry, notice: "Journal entry was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class JournalEntriesController < ApplicationController
   # PATCH/PUT /journal_entries/1
   def update
     if @journal_entry.update(journal_entry_params)
-      redirect_to @journal_entry, notice: 'Journal entry was successfully updated.'
+      redirect_to @journal_entry, notice: "Journal entry was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class JournalEntriesController < ApplicationController
   # DELETE /journal_entries/1
   def destroy
     @journal_entry.destroy
-    redirect_to journal_entries_url, notice: 'Journal entry was successfully destroyed.'
+    redirect_to journal_entries_url, notice: "Journal entry was successfully destroyed."
   end
 
   private

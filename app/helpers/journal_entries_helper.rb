@@ -10,7 +10,7 @@ module JournalEntriesHelper
   def analysis_confirmation
     return unless @journal_entry.analysis.present?
 
-    { 'turbo-confirm' => 'This will replace the current AI reflection. Are you sure?' }
+    { "turbo-confirm" => "This will replace the current AI reflection. Are you sure?" }
   end
 
   private
@@ -41,7 +41,10 @@ module JournalEntriesHelper
       # If we subtract the streak from the last entry date and the result
       # doesn't match the entry's date, we've found the first entry that breaks
       # the streak.
-      if entry.created_at.to_date != last_entry_date - streak
+      if entry.created_at.to_date == last_entry_date - streak
+        # Otherwise, increment the streak
+        streak += 1
+      else
         # If the streak we just found is longer than the longest streak we've
         # found so far, set it as the longest streak
         longest_streak = streak if streak > longest_streak
@@ -51,9 +54,6 @@ module JournalEntriesHelper
 
         # Set the streak to 1, since we've found an entry for the last day
         streak = 1
-      else
-        # Otherwise, increment the streak
-        streak += 1
       end
     end
 

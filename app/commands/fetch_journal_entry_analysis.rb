@@ -17,8 +17,8 @@ class FetchJournalEntryAnalysis
 
   def conversation_entries
     [
-      { role: 'user', content: analysis_instruction_text },
-      { role: 'user', content: journal_entry_content }
+      { role: "user", content: analysis_instruction_text },
+      { role: "user", content: journal_entry_content }
     ]
   end
 

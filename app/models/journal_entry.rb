@@ -1,6 +1,6 @@
 class JournalEntry < ApplicationRecord
   has_many :chat_logs, dependent: :destroy
-  has_many :embeddings, dependent: :destroy, class_name: 'JournalEntryEmbedding'
+  has_many :embeddings, dependent: :destroy, class_name: "JournalEntryEmbedding"
   has_and_belongs_to_many :people
   has_many :relationship_summary_embeddings, through: :people, source: :embeddings
 
@@ -13,14 +13,14 @@ class JournalEntry < ApplicationRecord
   end
 
   def created_at_string
-    created_at.strftime('%B %-d, %Y')
+    created_at.strftime("%B %-d, %Y")
   end
 
   def display_title
     if persisted?
       title.present? ? title_with_date : created_at_string
     else
-      Date.today.strftime('%B %-d, %Y')
+      Date.today.strftime("%B %-d, %Y")
     end
   end
 

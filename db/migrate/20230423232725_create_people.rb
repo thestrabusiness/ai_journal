@@ -17,7 +17,7 @@ class CreatePeople < ActiveRecord::Migration[7.0]
 
     change_table :journal_entry_embeddings do |t|
       t.references :journal_entry, foreign_key: true, index: true
-      ActiveRecord::Base.connection.execute('UPDATE journal_entry_embeddings SET journal_entry_id = embeddable_id')
+      ActiveRecord::Base.connection.execute("UPDATE journal_entry_embeddings SET journal_entry_id = embeddable_id")
       t.remove :embeddable_id
       t.remove :embeddable_type
       t.change_null :journal_entry_id, false

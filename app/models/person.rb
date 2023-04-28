@@ -1,6 +1,6 @@
 class Person < ApplicationRecord
   has_and_belongs_to_many :journal_entries
-  has_many :embeddings, dependent: :destroy, class_name: 'RelationshipSummaryEmbedding'
+  has_many :embeddings, dependent: :destroy, class_name: "RelationshipSummaryEmbedding"
 
   validates :name, presence: true, uniqueness: true
 
@@ -9,7 +9,7 @@ class Person < ApplicationRecord
     left_joins(:embeddings)
       .select("people.*, MAX(#{similarity_score_sql}) AS similarity_score")
       .where("#{similarity_score_sql} > #{similarity_threshold}")
-      .group('people.id')
-      .order(Arel.sql('similarity_score DESC'))
+      .group("people.id")
+      .order(Arel.sql("similarity_score DESC"))
   end
 end

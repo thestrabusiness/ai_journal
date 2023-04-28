@@ -1,6 +1,6 @@
 class AddEmbeddingToJournalEntry < ActiveRecord::Migration[7.0]
   def up
-    enable_extension 'vector'
+    enable_extension "vector"
     create_table :embeddings do |t|
       t.text :content, null: false
       t.vector :embedding, limit: 1536
@@ -12,6 +12,6 @@ class AddEmbeddingToJournalEntry < ActiveRecord::Migration[7.0]
 
   def down
     drop_table :embeddings
-    disable_extension 'vector'
+    disable_extension "vector"
   end
 end

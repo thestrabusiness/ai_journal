@@ -46,9 +46,9 @@ class GenerateTextChunks
 
       # Find the last period or punctuation mark in the chunk
       last_punctuation = [
-        chunk_text.rindex('.'),
-        chunk_text.rindex('?'),
-        chunk_text.rindex('!'),
+        chunk_text.rindex("."),
+        chunk_text.rindex("?"),
+        chunk_text.rindex("!"),
         chunk_text.rindex("\n")
       ].compact.max
 
@@ -59,7 +59,7 @@ class GenerateTextChunks
       end
 
       # Remove any newline characters and strip any leading or trailing whitespace
-      chunk_text_to_append = chunk_text.gsub("\n", ' ').strip
+      chunk_text_to_append = chunk_text.gsub("\n", " ").strip
 
       if chunk_text_to_append.size > MIN_CHUNK_LENGTH_TO_EMBED
         # Append the chunk text to the list of chunks
@@ -75,7 +75,7 @@ class GenerateTextChunks
 
     # Handle the remaining tokens
     unless tokens.empty?
-      remaining_text = tokenizer.decode(tokens).gsub("\n", ' ').strip
+      remaining_text = tokenizer.decode(tokens).gsub("\n", " ").strip
       if remaining_text.size > MIN_CHUNK_LENGTH_TO_EMBED
         chunks << remaining_text
       end
@@ -84,9 +84,11 @@ class GenerateTextChunks
     chunks
   end
 
-  private attr_reader :chunk_size, :text
-
   def tokenizer
-    @tokenizer ||= Tiktoken.get_encoding('cl100k_base')
+    @tokenizer ||= Tiktoken.get_encoding("cl100k_base")
   end
+
+  private
+
+  attr_reader :chunk_size, :text
 end

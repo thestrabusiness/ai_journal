@@ -10,7 +10,7 @@ class PeopleController < ApplicationController
       .embeddings
       .includes(:journal_entry)
       .where(journal_entry_id: @person.journal_entries.pluck(:id))
-      .order('journal_entries.created_at DESC')
+      .order("journal_entries.created_at DESC")
   end
 
   private

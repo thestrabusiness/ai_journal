@@ -8,19 +8,12 @@ class FetchEmbeddings
   end
 
   def run
-    client = OpenAI::Client.new
     text_chunks = GenerateTextChunks.run(text_content)
-    result = client.embeddings(
-      parameters: {
-        model: 'text-embedding-ada-002',
-        input: text_chunks
-      }
-    )
-
-    result['data'].map do |embedding_data|
+    result = embeddings_from_chunks(text_chunks)
+    result["data"].map do |embedding_data|
       {
-        chunk_text: text_chunks[embedding_data['index']],
-        embedding: embedding_data['embedding']
+        chunk_text: text_chunks[embedding_data["index"]],
+        embedding: embedding_data["embedding"]
       }
     end
   end
@@ -28,4 +21,17 @@ class FetchEmbeddings
   private
 
   attr_reader :text_content
+
+  def embeddings_from_chunks(text_chunks)
+    client.embeddings(
+      parameters: {
+        model: "text-embedding-ada-002",
+        input: text_chunks
+      }
+    )
+  end
+
+  def client
+    @client ||= OpenAI::Client.new
+  end
 end
