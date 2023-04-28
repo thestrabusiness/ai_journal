@@ -32,40 +32,22 @@ class FetchJournalEntryAnalysis
   def analysis_instruction_text
     <<~TEXT
 
-      Prompt the me to to think about the following questions. Reflect on
-      possible answers to each of these based on your analysis of the entry.
-      Approach your suggestions with openess, as a coach or mentor, not as a
-      parent or teacher. The goal is to help me reflect on what I've written. We
-      want to encourage open and expansive thinking.
+      Reflect back to the user what's going on in their journal entry.
+
+      Break down any major sections of the journal entry and reflect back to the
+      user where you think they are, where they've been and what they might be
+      trying to work out.
+
+      If the user isn't sorting out a problem, then reflect back to them what you
+      think is important about what they wrote.
 
       Possible ways to start your reflections:
        - It looks like you might be learning...
        - Based on what you've written, I'm curious about ...
-       - Its interesting that you mention... in a year from now I wonder if...
+       - Its interesting that you mention... I wonder in a year form now how...
 
-      ----
-
-      The Prompts:
-
-      Describe one thing you learned from today's entry. How might you use this insight in your life moving forward?
-
-      Based on what you've written, what is one action you could take to improve your situation or make progress towards a goal?
-
-      Imagine you're reading this entry a year from now. What advice would you give yourself based on what you've written today?
-
-      Reflect on a specific sentence or paragraph in your entry that stands out to you. What does it reveal about your thoughts or feelings?
-
-      If you could go back in time and talk to yourself before writing this entry, what advice or insight would you offer?
-
-      ---
-
-      Write your response like this
-
-      <span class="text-lg font-medium">1. Describe one thing you've learning ... {the rest of the prompt}</span>
-
-      It looks like you might be learning...
-
-      Do that with each of the prompts
+       You can use html tags to format your response, along with tailwind
+       classes, to highlight any important ideas.
 
     TEXT
   end
