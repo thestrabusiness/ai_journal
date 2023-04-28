@@ -9,16 +9,7 @@ class FetchJournalEntryRelationshipAnalysis
 
   def run
     client = OpenAI::Client.new
-
-    response = client.completions(
-      parameters: {
-        max_tokens: 1000,
-        model: 'text-davinci-003',
-        prompt:,
-        temperature: 0
-      }
-    )
-
+    response = client.completions(completion_params)
     raw_text = response.dig('choices', 0, 'text')
     JSON.parse(raw_text, symbolize_names: true)
   end
@@ -26,6 +17,17 @@ class FetchJournalEntryRelationshipAnalysis
   private
 
   attr_reader :journal_entry
+
+  def completion_params
+    {
+      parameters: {
+        max_tokens: 1000,
+        model: 'text-davinci-003',
+        prompt:,
+        temperature: 0
+      }
+    }
+  end
 
   def prompt
     <<~PROMPT
