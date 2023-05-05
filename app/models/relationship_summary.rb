@@ -1,4 +1,4 @@
-class RelationshipSummaryEmbedding < ApplicationRecord
+class RelationshipSummary < ApplicationRecord
   belongs_to :person
   belongs_to :journal_entry, optional: true
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_23_232725) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_05_145114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -94,15 +94,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_232725) do
     t.index ["name"], name: "index_people_on_name"
   end
 
-  create_table "relationship_summary_embeddings", force: :cascade do |t|
+  create_table "relationship_summaries", force: :cascade do |t|
     t.text "content", null: false
     t.vector "embedding", limit: 1536
     t.bigint "person_id", null: false
     t.bigint "journal_entry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["journal_entry_id"], name: "index_relationship_summary_embeddings_on_journal_entry_id"
-    t.index ["person_id"], name: "index_relationship_summary_embeddings_on_person_id"
+    t.index ["journal_entry_id"], name: "index_relationship_summaries_on_journal_entry_id"
+    t.index ["person_id"], name: "index_relationship_summaries_on_person_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -111,5 +111,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_232725) do
   add_foreign_key "journal_entries_people", "journal_entries"
   add_foreign_key "journal_entries_people", "people"
   add_foreign_key "journal_entry_embeddings", "journal_entries"
-  add_foreign_key "relationship_summary_embeddings", "people"
+  add_foreign_key "relationship_summaries", "people"
 end

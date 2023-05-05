@@ -26,23 +26,25 @@ class AnalyzeJournalEntry
 
   attr_reader :journal_entry
 
-  def create_embedding_for_entry(person, embedding_data)
-    person.embeddings.create!(
+  def create_relationship_summary_for_entry(person, embedding_data)
+    person.relationship_summaries.create!(
       content: embedding_data[:chunk_text],
       embedding: embedding_data[:embedding],
       journal_entry:
     )
   end
 
-  def clear_existing_embeddings_for_entry(person)
-    person.embeddings.where(journal_entry:).destroy_all
+  def clear_existing_relationship_summaries(person)
+    person.relationship_summaries.where(journal_entry:).destroy_all
   end
 
   def process_relationship_analysis(person_data)
     Person.find_or_create_by(name: person_data[:name]).tap do |person|
       generated_embeddings = FetchEmbeddings.run(person_data[:summary])
-      clear_existing_embeddings_for_entry(person)
-      generated_embeddings.each { |embedding| create_embedding_for_entry(person, embedding) }
+      clear_existing_relationship_summaries(person)
+      generated_embeddings.each do |embedding|
+        create_relationship_summary_for_entry(person, embedding)
+      end
     end
   end
 end
