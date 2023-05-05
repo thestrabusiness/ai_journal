@@ -50,7 +50,9 @@ class FetchJournalEntryAnalysis
        - Its interesting that you mention... I wonder in a year form now how...
 
        You can use html tags to format your response, along with tailwind
-       classes, to highlight any important ideas.
+       classes, to highlight any important ideas. You don't neee to use any br
+       tags, just use newlines to separate your paragraphs. Only use up to 2 new
+       lines between paragraphs. Don't start your response with any newlines.
 
     TEXT
   end
