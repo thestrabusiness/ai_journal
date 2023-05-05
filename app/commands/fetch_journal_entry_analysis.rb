@@ -8,7 +8,10 @@ class FetchJournalEntryAnalysis
   end
 
   def run
-    FetchChatCompletion.run(conversation_entries)
+    FetchChatCompletion.run(
+      conversation_entries,
+      model: FetchChatCompletion::Models::GPT_4
+    )
   end
 
   private
@@ -34,7 +37,7 @@ class FetchJournalEntryAnalysis
 
       Reflect back to the user what's going on in their journal entry.
 
-      Break down any major sections of the journal entry and reflect back to the
+      Break down the major themes of the journal entry and reflect back to the
       user where you think they are, where they've been and what they might be
       trying to work out.
 
