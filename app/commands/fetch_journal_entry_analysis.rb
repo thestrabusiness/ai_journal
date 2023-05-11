@@ -44,7 +44,9 @@ class FetchJournalEntryAnalysis
       If the user isn't sorting out a problem, then reflect back to them what you
       think is important about what they wrote.
 
-      Possible ways to start your reflections:
+      Here are some possible ways to frame your reflections, but you dont have
+      to use this exact language. You want to provide a transparent reflection:
+
        - It looks like you might be learning...
        - Based on what you've written, I'm curious about ...
        - Its interesting that you mention... I wonder in a year form now how...
