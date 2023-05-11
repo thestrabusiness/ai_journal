@@ -63,6 +63,6 @@ module JournalEntriesHelper
   # We only want to count the number of days that the user has made entries, so
   # we'll use the distinct method to only return one entry per day.
   def journal_entries_distinct_by_date
-    JournalEntry.order(created_at: :desc).distinct(:created_at)
+    JournalEntry.order(created_at: :desc).distinct("date(created_at)")
   end
 end
