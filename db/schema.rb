@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_145114) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_233625) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -68,14 +68,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_145114) do
     t.text "analysis"
   end
 
-  create_table "journal_entries_people", force: :cascade do |t|
+  create_table "journal_entries_relationships", force: :cascade do |t|
     t.bigint "journal_entry_id", null: false
-    t.bigint "person_id", null: false
+    t.bigint "relationship_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["journal_entry_id", "person_id"], name: "index_journal_entries_people_on_journal_entry_id_and_person_id", unique: true
-    t.index ["journal_entry_id"], name: "index_journal_entries_people_on_journal_entry_id"
-    t.index ["person_id"], name: "index_journal_entries_people_on_person_id"
+    t.index ["journal_entry_id", "relationship_id"], name: "index_journal_entries_relationships_on_entry_and_relationship", unique: true
+    t.index ["journal_entry_id"], name: "index_journal_entries_relationships_on_journal_entry_id"
+    t.index ["relationship_id"], name: "index_journal_entries_relationships_on_relationship_id"
   end
 
   create_table "journal_entry_embeddings", force: :cascade do |t|
@@ -87,29 +87,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_145114) do
     t.index ["journal_entry_id"], name: "index_journal_entry_embeddings_on_journal_entry_id"
   end
 
-  create_table "people", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_people_on_name"
-  end
-
   create_table "relationship_summaries", force: :cascade do |t|
     t.text "content", null: false
     t.vector "embedding", limit: 1536
-    t.bigint "person_id", null: false
+    t.bigint "relationship_id", null: false
     t.bigint "journal_entry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["journal_entry_id"], name: "index_relationship_summaries_on_journal_entry_id"
-    t.index ["person_id"], name: "index_relationship_summaries_on_person_id"
+    t.index ["relationship_id"], name: "index_relationship_summaries_on_relationship_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_relationships_on_name"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chat_logs", "journal_entries"
-  add_foreign_key "journal_entries_people", "journal_entries"
-  add_foreign_key "journal_entries_people", "people"
+  add_foreign_key "journal_entries_relationships", "journal_entries"
+  add_foreign_key "journal_entries_relationships", "relationships"
   add_foreign_key "journal_entry_embeddings", "journal_entries"
-  add_foreign_key "relationship_summaries", "people"
+  add_foreign_key "relationship_summaries", "relationships"
 end

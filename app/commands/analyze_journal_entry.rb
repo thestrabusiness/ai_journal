@@ -13,12 +13,13 @@ class AnalyzeJournalEntry
       analysis = FetchJournalEntryAnalysis.run(journal_entry)
       # Fetch a summary of the relationships in the journal entry content
       relationship_analysis = FetchJournalEntryRelationshipAnalysis.run(journal_entry)
-      # Process the analysis and relationship analysis into people and embeddings
-      people = relationship_analysis.map do |person_data|
-        process_relationship_analysis(person_data)
+      # Process the analysis and relationship analysis into relationships and
+      # embeddings
+      relationships = relationship_analysis.map do |relationship_data|
+        process_relationship_analysis(relationship_data)
       end
-      # Update the journal entry with the analysis and people
-      journal_entry.update(analysis:, people:)
+      # Update the journal entry with the analysis and relationships
+      journal_entry.update(analysis:, relationships:)
     end
   end
 
@@ -26,24 +27,24 @@ class AnalyzeJournalEntry
 
   attr_reader :journal_entry
 
-  def create_relationship_summary_for_entry(person, embedding_data)
-    person.relationship_summaries.create!(
+  def create_relationship_summary_for_entry(relationship, embedding_data)
+    relationship.relationship_summaries.create!(
       content: embedding_data[:chunk_text],
       embedding: embedding_data[:embedding],
       journal_entry:
     )
   end
 
-  def clear_existing_relationship_summaries(person)
-    person.relationship_summaries.where(journal_entry:).destroy_all
+  def clear_existing_relationship_summaries(relationships)
+    relationships.relationship_summaries.where(journal_entry:).destroy_all
   end
 
-  def process_relationship_analysis(person_data)
-    Person.find_or_create_by(name: person_data[:name]).tap do |person|
-      generated_embeddings = FetchEmbeddings.run(person_data[:summary])
-      clear_existing_relationship_summaries(person)
+  def process_relationship_analysis(relationship_data)
+    Relationship.find_or_create_by(name: relationship_data[:name]).tap do |relationship|
+      generated_embeddings = FetchEmbeddings.run(relationship_data[:summary])
+      clear_existing_relationship_summaries(relationship)
       generated_embeddings.each do |embedding|
-        create_relationship_summary_for_entry(person, embedding)
+        create_relationship_summary_for_entry(relationship, embedding)
       end
     end
   end

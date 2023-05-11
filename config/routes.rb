@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resources :journal_entries do
     resource :analysis, only: :create, controller: :journal_entry_analysis
   end
-  resources :people, except: :destroy
+  resources :relationships, except: :destroy
   root "journal_entries#new"
 end
