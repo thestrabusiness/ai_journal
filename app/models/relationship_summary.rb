@@ -1,7 +1,7 @@
 class RelationshipSummary < ApplicationRecord
   include DisplayTitle
 
-  belongs_to :relationship
+  belongs_to :relationship, touch: true
   belongs_to :journal_entry, optional: true
 
   has_neighbors :embedding, dimensions: 1536

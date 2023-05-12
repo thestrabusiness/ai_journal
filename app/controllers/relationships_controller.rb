@@ -16,7 +16,7 @@ class RelationshipsController < ApplicationController
 
   def find_relationships
     scope = Relationship.includes(:relationship_summaries)
-    return scope.order("created_at DESC") unless query.present?
+    return scope.order("updated_at DESC") unless query.present?
 
     query_embedding_data = FetchEmbeddings.run(query)
     query_embedding = query_embedding_data.first[:embedding]
