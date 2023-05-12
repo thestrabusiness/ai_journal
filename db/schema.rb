@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_233625) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_12_120210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -88,12 +88,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_233625) do
   end
 
   create_table "relationship_summaries", force: :cascade do |t|
-    t.text "content", null: false
     t.vector "embedding", limit: 1536
     t.bigint "relationship_id", null: false
     t.bigint "journal_entry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
     t.index ["journal_entry_id"], name: "index_relationship_summaries_on_journal_entry_id"
     t.index ["relationship_id"], name: "index_relationship_summaries_on_relationship_id"
   end

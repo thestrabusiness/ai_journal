@@ -6,11 +6,12 @@ class RelationshipsController < ApplicationController
 
   def show
     @relationship = Relationship.includes(:journal_entries).find(params[:id])
-    @summaries_for_journal_entries = @relationship
+    @relationship_summaries = @relationship
       .relationship_summaries
       .includes(:journal_entry)
       .where(journal_entry_id: @relationship.journal_entries.pluck(:id))
-      .order("journal_entries.created_at DESC")
+      .or(RelationshipSummary.where(journal_entry_id: nil))
+      .order("created_at DESC")
   end
 
   private

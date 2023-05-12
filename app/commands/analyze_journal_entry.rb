@@ -30,6 +30,7 @@ class AnalyzeJournalEntry
   def create_relationship_summary_for_entry(relationship, embedding_data)
     relationship.relationship_summaries.create!(
       content: embedding_data[:chunk_text],
+      created_at: journal_entry.created_at,
       embedding: embedding_data[:embedding],
       journal_entry:
     )

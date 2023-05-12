@@ -1,0 +1,14 @@
+<div class="main-panel-full">
+  <%= form_with(model: [@relationship_summary], class: "flex flex-col h-full") do |form| %>
+    <%= form.text_field :title,
+      placeholder: @relationship_summary.display_title,
+      class: "rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-1 mb-1" %>
+
+    <%= form.rich_text_area :content,
+      placeholder: "What's on your mind about #{@relationship.name}?",
+      class:"flex-1 resize-none rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-5 minimal-scrollbar mb-3" %>
+
+    <%= form.submit "Save",
+      class: "rounded-lg py-3 px-5 bg-blue-200 inline-block font-medium cursor-pointer" %>
+  <% end %>
+</div>

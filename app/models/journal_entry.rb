@@ -1,8 +1,10 @@
 class JournalEntry < ApplicationRecord
+  include DisplayTitle
+
   has_many :chat_logs, dependent: :destroy
   has_many :embeddings, dependent: :destroy, class_name: "JournalEntryEmbedding"
   has_and_belongs_to_many :relationships
-  has_many :relationship_summaries, through: :relationships
+  has_many :relationship_summaries
 
   has_rich_text :content
 
@@ -10,22 +12,6 @@ class JournalEntry < ApplicationRecord
 
   def analyze!
     AnalyzeJournalEntry.run(self)
-  end
-
-  def created_at_string
-    created_at.strftime("%B %-d, %Y")
-  end
-
-  def display_title
-    if persisted?
-      title.present? ? title_with_date : created_at_string
-    else
-      Date.today.strftime("%B %-d, %Y")
-    end
-  end
-
-  def title_with_date
-    "#{created_at_string}: #{title}"
   end
 
   private

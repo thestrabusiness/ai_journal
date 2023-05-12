@@ -1,19 +1,23 @@
 <div class="main-panel-container h-screen relative py-5 minimal-scrollbar">
   <div class="sticky-header">
-    <%= @relationship.name %>
+    <div>
+      <%= @relationship.name %>
+    </div>
+    <div class="flex flex-col text-right">
+      <%= link_to "Add an entry", new_relationship_summary_path(@relationship) %>
+      <%= link_to "AI Summary", new_relationship_summary_path(@relationship) %>
+    </div>
+
   </div>
 
   <div class="mt-5">
-    <% @summaries_for_journal_entries.each do |summary| %>
-      <%= link_to journal_entry_path(summary.journal_entry) do %>
-        <div class="white-panel mb-5">
-          <div class="flex justify-between py-3 text-xl">
-            <%= summary.journal_entry.display_title %>
-          </div>
-          <div>
-            <%= summary.content %>
-          </div>
-        </div>
+    <% @relationship_summaries.each do |summary| %>
+      <% if summary.journal_entry.present? %>
+        <%= link_to journal_entry_path(summary.journal_entry) do %>
+          <%= render "relationship_summary", summary: summary %>
+        <% end %>
+      <% else %>
+        <%= render "relationship_summary", summary: summary %>
       <% end %>
     <% end %>
   </div>
