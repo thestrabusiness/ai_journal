@@ -9,8 +9,6 @@ class RelationshipsController < ApplicationController
     @relationship_summaries = @relationship
       .relationship_summaries
       .includes(:journal_entry)
-      .where(journal_entry_id: @relationship.journal_entries.pluck(:id))
-      .or(RelationshipSummary.where(journal_entry_id: nil))
       .order("created_at DESC")
   end
 
