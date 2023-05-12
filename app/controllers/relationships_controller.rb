@@ -5,7 +5,7 @@ class RelationshipsController < ApplicationController
   end
 
   def show
-    @relationship = Relationship.includes(:journal_entries).find(params[:id])
+    @relationship = Relationship.find(params[:id])
     @relationship_summaries = @relationship
       .relationship_summaries
       .includes(:journal_entry)
@@ -15,8 +15,8 @@ class RelationshipsController < ApplicationController
   private
 
   def find_relationships
-    scope = Relationship.includes(journal_entries: :relationship_summaries).all
-    return scope unless query.present?
+    scope = Relationship.includes(:relationship_summaries)
+    return scope.order("created_at DESC") unless query.present?
 
     query_embedding_data = FetchEmbeddings.run(query)
     query_embedding = query_embedding_data.first[:embedding]
