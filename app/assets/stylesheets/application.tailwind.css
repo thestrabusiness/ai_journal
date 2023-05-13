@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+  .base-icon {
+    @apply h-8 w-8 min-h-[2rem] min-w-[2rem] cursor-pointer
+  }
+
   .main-panel-container {
     @apply h-full w-full
   }

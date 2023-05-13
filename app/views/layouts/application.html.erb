@@ -24,13 +24,13 @@
     <main class="flex h-full items-start">
       <div class="flex flex-col h-full my-5 mr-5 p-5 w-20 items-center bg-white rounded-r-lg shadow-md">
         <%= link_to root_path, class: "mb-8" do %>
-          <i data-feather="edit-3" class="h-8 w-8"></i>
+          <i data-feather="edit-3" class="base-icon"></i>
         <% end %>
         <%= link_to journal_entries_path, class: "mb-8" do %>
-          <i data-feather="book-open" class="h-8 w-8"></i>
+          <i data-feather="book-open" class="base-icon"></i>
         <% end %>
         <%= link_to relationships_path, class: "mb-8" do %>
-          <i data-feather="users" class="h-8 w-8"></i>
+          <i data-feather="users" class="base-icon"></i>
         <% end %>
       </div>
       <%= yield %>

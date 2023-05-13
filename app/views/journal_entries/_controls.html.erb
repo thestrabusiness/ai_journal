@@ -1,12 +1,12 @@
 <div class="flex">
   <%= link_to edit_journal_entry_path(journal_entry) do %>
-    <i data-feather="edit-2" class="h-8 w-8 min-h-[2rem] min-w-[2rem] mr-2"></i>
+    <i data-feather="edit-2" class="base-icon mr-2"></i>
   <% end %>
   <%= link_to journal_entry_path(journal_entry),
     data: {
       "turbo-confirm": "Are you sure you want to delete this entry?",
       "turbo-method": :delete
     } do %>
-    <i data-feather="trash" class="h-8 w-8"></i>
+    <i data-feather="trash" class="base-icon"></i>
   <% end %>
 </div>

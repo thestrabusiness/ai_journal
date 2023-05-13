@@ -1,13 +1,20 @@
 <div class="main-panel-container h-screen relative py-5 minimal-scrollbar">
-  <div class="sticky-header">
+  <div class="sticky-header items-center">
     <div>
       <%= @relationship.name %>
     </div>
-    <div class="flex flex-col text-right">
-      <%= link_to "Add an entry", new_relationship_summary_path(@relationship) %>
-      <%= link_to "AI Summary", new_relationship_summary_path(@relationship) %>
+    <div class="flex">
+      <%= link_to new_relationship_summary_path(@relationship) do %>
+        <div class="flex mr-2 items-center">
+          <i data-feather="plus-square" class="base-icon mr-2"></i> Add an entry
+        </div>
+      <% end %>
+      <%= button_to relationship_ai_summary_path(@relationship) do %>
+        <div class="flex items-center">
+          <i data-feather="zap" class="base-icon mr-2"></i> AI Summary
+        </div>
+      <% end %>
     </div>
-
   </div>
 
   <div class="mt-5">

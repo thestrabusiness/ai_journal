@@ -13,7 +13,6 @@ class RelationshipSummariesController < ApplicationController
     if @relationship_summary.save
       redirect_to @relationship_summary.relationship
     else
-      puts @relationship_summary.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end

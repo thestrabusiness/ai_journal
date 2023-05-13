@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   resources :relationships, except: :destroy do
     resources :summaries, only: %i[new create], controller: :relationship_summaries
+    resource :ai_summary, only: :create, controller: :ai_relationship_summary
   end
   root "journal_entries#new"
 end
