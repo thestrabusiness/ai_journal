@@ -1,6 +1,6 @@
 class RelationshipsController < ApplicationController
   def index
-    @relationships = find_relationships
+    @relationships = fetch_relationships
     @query = query
   end
 
@@ -14,13 +14,14 @@ class RelationshipsController < ApplicationController
 
   private
 
-  def find_relationships
+  def fetch_relationships
     scope = Relationship.includes(:relationship_summaries)
-    return scope.order("updated_at DESC") unless query.present?
 
-    query_embedding_data = FetchEmbeddings.run(query)
-    query_embedding = query_embedding_data.first[:embedding]
-    scope.where_relationship_matches_query(query_embedding)
+    if query.present?
+      scope.where("name ILIKE ?", "%#{query}%")
+    else
+      scope.order("updated_at DESC")
+    end
   end
 
   def search_params
