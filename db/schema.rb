@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_120210) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_29_191446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
+
+  create_enum :chat_log_kinds, [
+    "chat",
+    "question",
+  ], force: :cascade
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -58,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_120210) do
     t.bigint "journal_entry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.enum "kind", default: "chat", null: false, enum_type: "chat_log_kinds"
     t.index ["journal_entry_id"], name: "index_chat_logs_on_journal_entry_id"
   end
 

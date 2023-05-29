@@ -14,6 +14,15 @@ class JournalEntry < ApplicationRecord
     AnalyzeJournalEntry.run(self)
   end
 
+  def self.matching_query(query_embedding, similarity_threshold: 0.7)
+    similarity_score_sql = Arel.sql("1 - (journal_entry_embeddings.embedding <=> '#{query_embedding}')")
+    left_joins(:embeddings)
+      .select("journal_entries.*, MAX(#{similarity_score_sql}) AS similarity_score")
+      .where("#{similarity_score_sql} > #{similarity_threshold}")
+      .group("journal_entries.id")
+      .order(Arel.sql("similarity_score DESC"))
+  end
+
   private
 
   def generate_content_embeddings

@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     resources :summaries, only: %i[new create], controller: :relationship_summaries
     resource :ai_summary, only: :create, controller: :ai_relationship_summary
   end
+  resource :questions, only: %i[create show]
+  resources :questions, only: :destroy
   root "journal_entries#new"
 end

@@ -3,13 +3,4 @@ class Relationship < ApplicationRecord
   has_many :relationship_summaries, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
-
-  def self.where_relationship_matches_query(query_embedding, similarity_threshold: 0.7)
-    similarity_score_sql = Arel.sql("1 - (relationship_summaries.embedding <=> '#{query_embedding}')")
-    left_joins(:relationship_summaries)
-      .select("relationships.*, MAX(#{similarity_score_sql}) AS similarity_score")
-      .where("#{similarity_score_sql} > #{similarity_threshold}")
-      .group("relationships.id")
-      .order(Arel.sql("similarity_score DESC"))
-  end
 end
