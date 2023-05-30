@@ -5,7 +5,7 @@
     </div>
     <%= form_for :search, url: relationships_path, method: :get, class: "flex items-center" do |f| %>
       <%= f.text_field :query, value: @query, class: "h-10 border border-gray-300 rounded-md p-1.5 mr-2", placeholder: "Find by name" %>
-      <%= f.submit "Search", class: "bg-blue-300 py-1.5 px-4 rounded cursor-pointer" %>
+      <%= f.submit "Search", class: "submit-button py-1.5 px-4" %>
     <% end %>
   </div>
 

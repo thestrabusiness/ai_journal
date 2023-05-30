@@ -34,6 +34,10 @@
   .sticky-header {
     @apply flex sticky top-0 left-0 right-0 justify-between white-panel py-3 text-xl
   }
+
+  .submit-button {
+    @apply rounded-lg py-3 px-5 bg-blue-200 inline-block font-medium cursor-pointer
+  }
 }
 
 .chat-bubble > p:not(:last-child) {
