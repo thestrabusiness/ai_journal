@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
   )
 
   def set_chat_log
-    @chat_log = ChatLog.first_or_create!
+    @chat_log = ChatLog.chat.first_or_create!
   end
 end
