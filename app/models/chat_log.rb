@@ -45,7 +45,7 @@ class ChatLog < ApplicationRecord
       .sort_by { |entry| entry["created_at"] }
       .map do |entry|
         {
-          content: "#{entry['context']} #{entry['content']}}".strip,
+          content: "#{entry['context']}\n\n #{entry['content']}}".strip,
           role: entry["role"]
         }
       end

@@ -32,7 +32,6 @@ class QuestionsController < ApplicationController
       context_string += "\n\n"
       context_string += entry.content.to_plain_text
     end
-    context_string += "\n\n"
     context_string
   end
 end
