@@ -1,5 +1,5 @@
 <%= form_with model: chat_log,
-  data: { controller: "ai-chat-form"},
+  data: { controller: "submit-state"},
   id: "#{dom_id(chat_log)}-form",
   class:"flex-shrink-0 pt-5 bg-white",
   method: :post,
@@ -9,7 +9,7 @@
       class: "w-full rounded-lg border border-gray-300 p-2",
       placeholder: "Type your message here" %>
     <%= form.submit "Submit",
-      data: { ai_chat_form_target: "submit" },
+      data: { submit_state_target: "submit" },
       class: "submit-button ml-2 py-2 px-4" %>
   </div>
 <% end %>

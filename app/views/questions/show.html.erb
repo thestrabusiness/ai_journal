@@ -1,11 +1,17 @@
 <div class="main-panel-container pr-1.5 h-screen mt-5 pb-5 minimal-scrollbar">
   <div class="sticky-header p-3">
-    <%= form_with model: @question, url: questions_path, method: :post, class: "w-full flex justify-between" do |form| %>
+    <%= form_with model: @question,
+      url: questions_path,
+      method: :post,
+      data: { controller: "submit-state" },
+      class: "w-full flex justify-between" do |form| %>
       <%= form.text_field :content,
         placeholder: "Ask a question about yourself and relationships...",
         class: "h-full mr-3 rounded-md border border-gray-200 focus:outline-none focus:border-gray-200 focus:ring-0 w-full text-2xl"
       %>
-      <%= form.submit "Send", class: "submit-button" %>
+      <%= form.submit "Send",
+        data: {submit_state_target: "submit"},
+        class: "submit-button" %>
     <% end %>
   </div>
   <div class="mt-5">
