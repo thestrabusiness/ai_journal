@@ -12,7 +12,7 @@
   </head>
 
   <body
-    class="fixed inset-0 bg-gray-100 mb-10 <%= "animate-slide-down-up" if notice.present? %>"
+    class="sm:fixed sm:inset-0 sm:mb-10 bg-gray-100 <%= "animate-slide-down-up" if notice.present? %>"
     data-controller="feather-icons">
     <% if notice.present? %>
       <div
@@ -21,21 +21,21 @@
         <%= notice %>
       </div>
     <% end %>
-    <main class="flex h-full items-start">
-      <div class="flex flex-col h-full my-5 mr-5 p-5 w-20 items-center bg-white rounded-r-lg shadow-md">
-        <%= link_to root_path, class: "mb-8" do %>
+    <main class="flex flex-col-reverse sm:flex-row h-screen sm:h-full items-start">
+      <nav class="flex flex-row sm:flex-col sm:h-full sm:w-20 h-20 w-full sm:my-5 mr-5 p-5 justify-evenly sm:justify-normal sm:items-center bg-white sm:rounded-r-lg sm:rounded-l-none border-gray-200 border-t-[0.5px] shadow-md">
+        <%= link_to root_path, class: "sm:mb-8" do %>
           <i data-feather="edit-3" class="base-icon"></i>
         <% end %>
-        <%= link_to journal_entries_path, class: "mb-8" do %>
+        <%= link_to journal_entries_path, class: "sm:mb-8" do %>
           <i data-feather="book-open" class="base-icon"></i>
         <% end %>
-        <%= link_to relationships_path, class: "mb-8" do %>
+        <%= link_to relationships_path, class: "sm:mb-8" do %>
           <i data-feather="users" class="base-icon"></i>
         <% end %>
-        <%= link_to questions_path, class: "mb-8" do %>
+        <%= link_to questions_path, class: "sm:mb-8" do %>
           <i data-feather="search" class="base-icon"></i>
         <% end %>
-      </div>
+      </nav>
       <%= yield %>
       <%= render "chat_logs/sidebar" %>
     </main>

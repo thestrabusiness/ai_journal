@@ -12,7 +12,8 @@
   }
 
   .main-panel-full {
-    @apply main-panel-container white-panel mt-5 mr-1.5
+    @apply main-panel-container white-panel sm:mt-5 lg:mr-1.5
+    rounded-none sm:rounded-l-lg lg:rounded-lg
   }
 
   .white-panel {
