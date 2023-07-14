@@ -26,6 +26,11 @@ module.exports = {
       width: {
         "ai-menu": "40rem",
       },
+      screens: {
+        "mobile-portrait": {
+          raw: "(max-height: 500px)",
+        },
+      },
     },
   },
   plugins: [

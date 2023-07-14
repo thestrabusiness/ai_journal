@@ -12,7 +12,7 @@
   </head>
 
   <body
-    class="sm:fixed sm:inset-0 sm:mb-10 bg-gray-100 <%= "animate-slide-down-up" if notice.present? %>"
+    class="sm:fixed sm:inset-0 sm:mb-10 mobile-portrait:mb-0 bg-gray-100 <%= "animate-slide-down-up" if notice.present? %>"
     data-controller="feather-icons">
     <% if notice.present? %>
       <div
@@ -22,7 +22,7 @@
       </div>
     <% end %>
     <main class="flex flex-col-reverse sm:flex-row h-screen sm:h-full items-start">
-      <nav class="flex flex-row sm:flex-col sm:h-full sm:w-20 h-20 w-full sm:my-5 mr-5 p-5 justify-evenly sm:justify-normal sm:items-center bg-white sm:rounded-r-lg sm:rounded-l-none border-gray-200 border-t-[0.5px] shadow-md">
+      <nav class="nav-bar">
         <%= link_to root_path, class: "sm:mb-8" do %>
           <i data-feather="edit-3" class="base-icon"></i>
         <% end %>

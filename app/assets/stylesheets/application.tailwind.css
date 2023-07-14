@@ -7,13 +7,31 @@
     @apply h-8 w-8 min-h-[2rem] min-w-[2rem] cursor-pointer
   }
 
+  .nav-bar {
+    @apply flex flex-row h-20 w-full mr-5 p-5 justify-evenly bg-white border-gray-200 border-t-[0.5px] shadow-md
+    sm:flex-col sm:h-full sm:w-20 sm:my-5 sm:justify-normal sm:items-center sm:rounded-r-lg sm:rounded-l-none 
+    mobile-portrait:m-0 mobile-portrait:border-r-[0.5px] mobile-portrait:rounded-none mobile-portrait:shadow-none
+  }
+
+  .chat-sidebar {
+    @apply hidden lg:flex flex-col h-full w-20 items-center bg-white rounded-l-lg shadow-md transition-all
+    my-5 ml-3 py-5 pl-5 pr-3
+    mobile-portrait:rounded-none mt-0 mobile-portrait:shadow-none mobile-portrait:border-l-[0.5px]
+  }
+
   .main-panel-container {
-    @apply h-full w-full
+    @apply h-full w-full mobile-portrait:ml-5
+  }
+
+  .main-panel {
+    @apply main-panel-container white-panel
+    rounded-none sm:rounded-l-lg lg:rounded-lg
+    mobile-portrait:rounded-none mobile-portrait:shadow-none
+    sm:mt-5 lg:mr-1.5
   }
 
   .main-panel-full {
-    @apply main-panel-container white-panel sm:mt-5 lg:mr-1.5
-    rounded-none sm:rounded-l-lg lg:rounded-lg
+    @apply main-panel mobile-portrait:m-0
   }
 
   .white-panel {
