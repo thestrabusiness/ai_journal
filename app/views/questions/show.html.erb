@@ -5,7 +5,10 @@
     <%= form_with model: @question,
       url: questions_path,
       method: :post,
-      data: { controller: "submit-state" },
+      data: {
+        action: "submit-state#submit",
+        controller: "submit-state",
+      },
       class: "w-full flex justify-between" do |form| %>
       <%= form.text_field :content,
         placeholder: "Ask a question about yourself and relationships...",

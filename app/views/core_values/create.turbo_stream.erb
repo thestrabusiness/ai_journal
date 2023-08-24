@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "core_value_form" do %>
+  <%= render partial: "form" %>
+<% end %>
+
+<%= turbo_stream.prepend "core_values" do %>
+  <%= render partial: "core_value", locals: { core_value: @core_value } %>
+<% end %>

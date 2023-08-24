@@ -1,0 +1,23 @@
+<div
+  id="scrollable"
+  class="main-panel-container pl-1.5 sm:pl-0 h-screen mt-5 pb-5 relative minimal-scrollbar">
+  <div data-controller="visibility">
+    <div class="sticky-header mb-5">
+      <div class="w-full flex items-center justify-between">
+        <div class="my-1">
+          Your Core Values
+        </div>
+        <div class="flex items-center cursor-pointer" data-action="click->visibility#toggle" data-visibility-target="visibility" >
+          <i data-feather="plus" class="base-icon ml-2"></i>
+          Add A Value
+        </div>
+      </div>
+    </div>
+
+    <%= render partial: 'form' %>
+  </div>
+
+  <div id="core_values" class="mt-5">
+    <%= render @core_values %>
+  </div>
+</div>

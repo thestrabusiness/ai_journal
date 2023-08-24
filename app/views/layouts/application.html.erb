@@ -35,6 +35,9 @@
         <%= link_to questions_path, class: "sm:mb-8" do %>
           <i data-feather="search" class="base-icon"></i>
         <% end %>
+        <%= link_to core_values_path, class: "sm:mb-8" do %>
+          <i data-feather="heart" class="base-icon"></i>
+        <% end %>
       </nav>
       <%= yield %>
       <%= render "chat_logs/sidebar" %>

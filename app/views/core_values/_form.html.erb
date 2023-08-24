@@ -1,0 +1,25 @@
+<div
+  class="hidden white-panel mb-5"
+  id="core_value_form"
+  data-visibility-target="visibility">
+  <%= form_with model: CoreValue.new, data: { controller: "submit-state" } do |form| %>
+    <div class="flex">
+      <%= form.text_field :name,
+        data: { action: "submit-state#checkRequired", submit_state_target: "required" },
+        placeholder: "Add a new core value",
+        class: "rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-1 mb-1" %>
+      <i data-feather="x" data-action="click->visibility#toggle" class="base-icon"></i>
+    </div>
+    <%= form.text_field :description,
+      data: { action: "submit-state#checkRequired", submit_state_target: "required" },
+      placeholder: "Add a short description of your core value",
+      class:"flex-1 resize-none rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-5 minimal-scrollbar mb-3" %>
+    <%= form.submit "Save",
+      disabled: true,
+      data: {
+        action: "visibility#toggle submit-state#submit",
+        submit_state_target: "submit"
+      },
+      class: "submit-button" %>
+  <% end %>
+</div>
