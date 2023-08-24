@@ -16,7 +16,7 @@
   .chat-sidebar {
     @apply hidden lg:flex flex-col h-full w-20 items-center bg-white rounded-l-lg shadow-md transition-all
     my-5 ml-3 py-5 pl-5 pr-3
-    mobile-portrait:rounded-none mt-0 mobile-portrait:shadow-none mobile-portrait:border-l-[0.5px]
+    mobile-portrait:rounded-none mobile-portrait:my-0 mobile-portrait:shadow-none mobile-portrait:border-l-[0.5px]
   }
 
   .main-panel-container {
