@@ -19,6 +19,6 @@ export default class extends Controller {
 
     this.submitTarget.value = "Submitting...";
     this.submitTarget.disabled = true;
-    this.element.submit();
+    this.element.requestSubmit();
   }
 }
