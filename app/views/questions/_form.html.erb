@@ -1,0 +1,16 @@
+<div class="sticky-header p-3" id="question_form">
+  <%= form_with model: ChatLog.new,
+    url: questions_path,
+    method: :post,
+    data: { controller: "submit-state" },
+    class: "w-full flex justify-between" do |form| %>
+    <%= form.text_field :content,
+      placeholder: "Ask a question about yourself and relationships...",
+      class: "h-full mr-3 rounded-md border border-gray-200 focus:outline-none focus:border-gray-200 focus:ring-0 w-full text-2xl"
+    %>
+    <%= form.submit "Send",
+      action: "submit-state#submit",
+      data: { submit_state_target: "submit" },
+      class: "submit-button" %>
+  <% end %>
+</div>

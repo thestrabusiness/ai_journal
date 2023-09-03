@@ -1,0 +1,16 @@
+<div class="white-panel mb-5" id="<%= dom_id(question) %>">
+  <% question.entries_for_display.each.with_index do |entry, index| %>
+    <div class="flex justify-between mb-3 <%= question_text_class(index) %>">
+      <%= simple_format entry["content"] %>
+      <% if index.zero? %>
+        <%= link_to question_path(question),
+          data: {
+            "turbo-confirm": "Are you sure you want to delete this entry?",
+            "turbo-method": :delete
+          } do %>
+          <i data-feather="trash" class="base-icon"></i>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

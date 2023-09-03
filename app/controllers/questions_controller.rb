@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
   def show
-    @question = ChatLog.new
     @questions = ChatLog.question.order("created_at DESC")
   end
 
@@ -8,13 +7,21 @@ class QuestionsController < ApplicationController
     @question = ChatLog.new(kind: "question")
     @question.add_user_entry(question_params[:content], context)
     @question.save!
-    redirect_to questions_path
+
+    respond_to do |format|
+      format.html { redirect_to questions_path }
+      format.turbo_stream
+    end
   end
 
   def destroy
     @question = ChatLog.find(params[:id])
     @question.destroy!
-    redirect_to questions_path
+
+    respond_to do |format|
+      format.html { redirect_to questions_path }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@question) }
+    end
   end
 
   private
