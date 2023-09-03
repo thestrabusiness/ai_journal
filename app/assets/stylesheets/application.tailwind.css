@@ -64,6 +64,10 @@
   @apply mb-3
 }
 
+.p-spacing > p:not(:last-child) {
+  @apply mb-3
+}
+
 .minimal-scrollbar {
   overflow-y: scroll;
   scrollbar-color: #888 transparent;

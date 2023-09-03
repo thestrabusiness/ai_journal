@@ -23,7 +23,7 @@
     <% @questions.each do |question| %>
       <div class="white-panel mb-5">
         <% question.entries_for_display.each.with_index do |entry, index| %>
-          <div class="flex justify-between mb-2 <%= "text-lg font-bold" if index.zero? %>">
+          <div class="flex justify-between mb-3 <%= question_text_class(index) %>">
             <%= simple_format entry["content"] %>
             <% if index.zero? %>
               <%= link_to question_path(question),
