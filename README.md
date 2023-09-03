@@ -8,7 +8,7 @@ journal entries and relationships.
 
 ### Dependencies
 
-1. Ruby 3.1.0
+1. Ruby 3.2.2
 1. PostgreSQL (11+ for pgvector support)
 1. [pgvector extension](https://github.com/pgvector/pgvector)
 1. OpenAI API Key
