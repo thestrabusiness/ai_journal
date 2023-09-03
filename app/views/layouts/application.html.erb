@@ -11,9 +11,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body
-    class="sm:fixed sm:inset-0 sm:mb-10 mobile-portrait:mb-0 bg-gray-100 <%= "animate-slide-down-up" if notice.present? %>"
-    data-controller="feather-icons">
+  <body class="sm:fixed sm:inset-0 sm:mb-10 mobile-portrait:mb-0 bg-gray-100 <%= "animate-slide-down-up" if notice.present? %>">
     <% if notice.present? %>
       <div
         class="flex w-full items-center justify-center h-14 bg-green-200 text-green-600 rounded-b-lg shadow-md"
@@ -24,19 +22,19 @@
     <main class="flex flex-col-reverse sm:flex-row h-screen sm:h-full items-start">
       <nav class="nav-bar">
         <%= link_to root_path, class: "sm:mb-8" do %>
-          <i data-feather="edit-3" class="base-icon"></i>
+          <%= icon "edit-3" %>
         <% end %>
         <%= link_to journal_entries_path, class: "sm:mb-8" do %>
-          <i data-feather="book-open" class="base-icon"></i>
+          <%= icon "book-open" %>
         <% end %>
         <%= link_to relationships_path, class: "sm:mb-8" do %>
-          <i data-feather="users" class="base-icon"></i>
+          <%= icon "users" %>
         <% end %>
         <%= link_to questions_path, class: "sm:mb-8" do %>
-          <i data-feather="search" class="base-icon"></i>
+          <%= icon "search" %>
         <% end %>
         <%= link_to core_values_path, class: "sm:mb-8" do %>
-          <i data-feather="heart" class="base-icon"></i>
+          <%= icon "heart" %>
         <% end %>
       </nav>
       <%= yield %>

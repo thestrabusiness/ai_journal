@@ -3,7 +3,6 @@ import "@hotwired/turbo-rails";
 import "trix";
 import "@rails/actiontext";
 import "controllers";
-import feather from "feather-icons";
 
 // For smaller screens, set the height of the main element to the height of
 // the window so the footer can rest at the bottom of the page, regardless of
@@ -33,7 +32,6 @@ const adjustScrollableHeight = () => {
 };
 
 document.addEventListener("turbo:load", () => {
-  feather.replace();
   resizeMain();
   adjustScrollableHeight();
 

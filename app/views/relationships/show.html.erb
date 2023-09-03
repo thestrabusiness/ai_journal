@@ -6,12 +6,12 @@
     <div class="flex">
       <%= link_to new_relationship_summary_path(@relationship) do %>
         <div class="flex mr-2 items-center">
-          <i data-feather="plus-square" class="base-icon mr-2"></i> Add an entry
+          <%= icon "plus-square", class: "mr-2" %> Add an entry
         </div>
       <% end %>
       <%= button_to relationship_ai_summary_path(@relationship) do %>
         <div class="flex items-center">
-          <i data-feather="zap" class="base-icon mr-2"></i> AI Summary
+          <%= icon "zap", class: "ml-2" %> AI Summary
         </div>
       <% end %>
     </div>

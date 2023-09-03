@@ -1,7 +1,5 @@
 <div data-controller="ai-menu" class="chat-sidebar">
-  <i data-feather="message-square"
-     data-ai-menu-target="button"
-     class="base-icon mb-5"></i>
+  <%= icon "message-square", class: "mb-5", data: { ai_menu_target: "button" } %>
   <div
     data-ai-menu-target="content"
     class="flex-grow grid grid-rows-[1fr,auto] h-0 transition-opacity opacity-0">

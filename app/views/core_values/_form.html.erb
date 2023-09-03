@@ -8,7 +8,7 @@
         data: { action: "submit-state#checkRequired", submit_state_target: "required" },
         placeholder: "Add a new core value",
         class: "rounded-md border-none focus:outline-none focus:ring-gray-300 w-full text-2xl py-1 mb-1" %>
-      <i data-feather="x" data-action="click->visibility#toggle" class="base-icon"></i>
+      <%= icon "x", data: { action: "click->visibility#toggle" } %>
     </div>
     <%= form.text_field :description,
       data: { action: "submit-state#checkRequired", submit_state_target: "required" },
