@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.0"
+ruby File.read(".ruby-version").strip
 
 gem "activerecord-postgres_enum"
 gem "bootsnap", require: false
