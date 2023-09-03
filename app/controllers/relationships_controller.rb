@@ -8,8 +8,9 @@ class RelationshipsController < ApplicationController
     @relationship = Relationship.find(params[:id])
     @relationship_summaries = @relationship
       .relationship_summaries
+      .with_all_rich_text
       .includes(:journal_entry)
-      .order("created_at DESC")
+      .order("relationship_summaries.created_at DESC")
   end
 
   private

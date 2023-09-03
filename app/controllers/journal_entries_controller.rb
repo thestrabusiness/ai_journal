@@ -3,7 +3,7 @@ class JournalEntriesController < ApplicationController
 
   # GET /journal_entries
   def index
-    @journal_entries = JournalEntry.order(created_at: :desc)
+    @journal_entries = JournalEntry.with_all_rich_text.order(created_at: :desc)
   end
 
   # GET /journal_entries/1
