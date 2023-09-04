@@ -4,6 +4,10 @@ class StreakCounter
       raise ArgumentError, "provided class must be an ActiveRecord class"
     end
 
+    unless klass.column_names.include?("created_at")
+      raise ArgumentError, "provided class must have a created_at column"
+    end
+
     @klass = klass
   end
 

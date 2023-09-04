@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :journal_entries do
     resource :analysis, only: :create, controller: :journal_entry_analysis
   end
+  resource :pulse_check, only: %i[create show]
   resources :relationships, except: :destroy do
     resources :summaries, only: %i[new create], controller: :relationship_summaries
     resource :ai_summary, only: :create, controller: :ai_relationship_summary

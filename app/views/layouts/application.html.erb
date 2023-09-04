@@ -21,21 +21,12 @@
     <% end %>
     <main class="flex flex-col-reverse sm:flex-row h-screen sm:h-full items-start">
       <nav class="nav-bar">
-        <%= link_to root_path, class: "sm:mb-8" do %>
-          <%= icon "edit-3" %>
-        <% end %>
-        <%= link_to journal_entries_path, class: "sm:mb-8" do %>
-          <%= icon "book-open" %>
-        <% end %>
-        <%= link_to relationships_path, class: "sm:mb-8" do %>
-          <%= icon "users" %>
-        <% end %>
-        <%= link_to questions_path, class: "sm:mb-8" do %>
-          <%= icon "search" %>
-        <% end %>
-        <%= link_to core_values_path, class: "sm:mb-8" do %>
-          <%= icon "heart" %>
-        <% end %>
+        <%= render "nav_link", path: root_path, icon_name: "edit-3" %>
+        <%= render "nav_link", path: journal_entries_path, icon_name: "book-open" %>
+        <%= render "nav_link", path: relationships_path, icon_name: "users" %>
+        <%= render "nav_link", path: questions_path, icon_name: "search" %>
+        <%= render "nav_link", path: core_values_path, icon_name: "heart" %>
+        <%= render "nav_link", path: pulse_check_path, icon_name: "activity" %>
       </nav>
       <%= yield %>
       <%= render "chat_logs/sidebar" %>

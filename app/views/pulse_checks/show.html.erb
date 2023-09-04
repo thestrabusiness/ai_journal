@@ -1,0 +1,32 @@
+<div
+  id="scrollable"
+  class="main-panel-container pl-1.5 sm:pl-0 h-screen mt-5 pb-5 minimal-scrollbar">
+  <div class="sticky-header mb-5">
+    <div>Pulse Check</div>
+    <%= link_to pulse_check_path, data: { turbo_method: :post } do %>
+      <%= icon "activity" %>
+    <% end %>
+  </div>
+
+  <% if @pulse_check.nil? %>
+    <div class="white-panel mb-5">
+      <div class="text-lg font-bold mb-3">
+        No pulse check has been submitted yet.
+      </div>
+    </div>
+  <% else %>
+    <div class="white-panel mb-5">
+      <%= @pulse_check.summary %>
+    </div>
+    <% @pulse_check.core_value_scores.each do |core_value| %>
+      <div class="white-panel mb-5">
+        <div class="text-lg font-bold mb-3">
+          <%= core_value["name"] %>: <%= core_value["score"] %>
+        </div>
+        <div>
+          <%= core_value["reasoning"] %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

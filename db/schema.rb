@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_23_000922) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_04_220330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -98,6 +98,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_23_000922) do
     t.datetime "updated_at", null: false
     t.bigint "journal_entry_id", null: false
     t.index ["journal_entry_id"], name: "index_journal_entry_embeddings_on_journal_entry_id"
+  end
+
+  create_table "pulse_checks", force: :cascade do |t|
+    t.text "summary"
+    t.jsonb "core_value_scores", default: [], null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "relationship_summaries", force: :cascade do |t|
