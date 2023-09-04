@@ -1,11 +1,18 @@
 class StreakCounter
-  def initialize(records)
-    @records = records
+  def initialize(klass)
+    unless klass < ActiveRecord::Base
+      raise ArgumentError, "provided class must be an ActiveRecord class"
+    end
+
+    @klass = klass
   end
 
   def current_streak
     streak = 0
     streak_offset = 0
+    # We only want to count one record per day, so we need to use DISTINCT
+    # and group by the date portion of the created_at timestamp
+    records = klass.order(created_at: :desc).distinct("date(created_at)")
 
     records.each.with_index do |record, index|
       # Check for a streak whose last record was created yesterday. Keep this
@@ -27,37 +34,43 @@ class StreakCounter
     streak
   end
 
-  # TODO: It might be better to use a SQL query to find the longest streak in
-  # the future, but this works for now.
   def longest_streak
-    last_record_date = Date.today
-    longest_streak = 0
-    streak = 0
-
-    records.each do |record|
-      # If we subtract the streak from the last record date and the result
-      # doesn't match the record's date, we've found the first record that
-      # breaks the streak.
-      if record.created_at.to_date == last_record_date - streak
-        # Otherwise, increment the streak
-        streak += 1
-      else
-        # If the streak we just found is longer than the longest streak we've
-        # found so far, set it as the longest streak
-        longest_streak = streak if streak > longest_streak
-
-        # Set the last record date to the date of the record we just found
-        last_record_date = record.created_at.to_date
-
-        # Set the streak to 1, since we've found an record for the last day
-        streak = 1
-      end
-    end
-
-    longest_streak
+    result = ActiveRecord::Base.connection.execute(longest_streak_sql)
+    result.first["longest_streak"]
   end
 
   private
 
-  attr_reader :records
+  # This SQL query is currently assuming that the user is in the Eastern time
+  # zone. Once I have a user model, I can use the user's time zone instead. This
+  # just makes it possible to get the correct streaks for the current day for my
+  # own data.
+  def longest_streak_sql
+    <<~SQL
+      WITH converted_dates AS (
+        SELECT (created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/New_York')::date AS created_date
+        FROM #{klass.table_name}
+      ),
+      ranked_records AS (
+        SELECT created_date, RANK() OVER (ORDER BY created_date) AS r
+        FROM converted_dates
+        GROUP BY created_date
+        ORDER BY created_date
+      ),
+      streaks AS (
+        SELECT created_date, created_date - INTERVAL '1 day' * r AS grouping
+        FROM ranked_records
+      ),
+      grouped_streaks AS (
+        SELECT COUNT(*) AS streak_length, MIN(created_date) AS streak_start
+        FROM streaks
+        GROUP BY grouping
+        ORDER BY streak_length DESC
+      )
+      SELECT MAX(streak_length) AS longest_streak
+      FROM grouped_streaks;
+    SQL
+  end
+
+  attr_reader :klass
 end

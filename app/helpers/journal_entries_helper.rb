@@ -16,20 +16,14 @@ module JournalEntriesHelper
   private
 
   def current_streak
-    streak_counter.current_streak
+    @current_streak ||= streak_counter.current_streak
   end
 
   def longest_streak
-    streak_counter.longest_streak
+    @longest_streak ||= streak_counter.longest_streak
   end
 
   def streak_counter
-    @streak_counter ||= StreakCounter.new(journal_entries_distinct_by_date)
-  end
-
-  # We only want to count the number of days that the user has made entries, so
-  # we'll use the distinct method to only return one entry per day.
-  def journal_entries_distinct_by_date
-    JournalEntry.order(created_at: :desc).distinct("date(created_at)")
+    @streak_counter ||= StreakCounter.new(JournalEntry)
   end
 end
