@@ -26,12 +26,15 @@ class JournalEntry < ApplicationRecord
   private
 
   def generate_content_embeddings
-    embedding_data = FetchEmbeddings.run(content.to_plain_text)
-    embedding_data.each do |data|
-      embeddings.create!(
-        content: data[:chunk_text],
-        embedding: data[:embedding]
-      )
+    ActiveRecord::Base.transaction do
+      embeddings.destroy_all
+      embedding_data = FetchEmbeddings.run(content.to_plain_text)
+      embedding_data.each do |data|
+        embeddings.create!(
+          content: data[:chunk_text],
+          embedding: data[:embedding]
+        )
+      end
     end
   end
 end
