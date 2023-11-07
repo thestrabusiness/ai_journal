@@ -75,7 +75,7 @@ class ChatLog < ApplicationRecord
     if question?
       add_entry("system", question_system_role)
     else
-      add_entry("system", "You are a helpful assistant.")
+      add_entry("system", chat_system_role)
     end
   end
 
@@ -106,6 +106,32 @@ class ChatLog < ApplicationRecord
       Just answer the question as if you were talking to a human.
 
       Refer to me as "you" or "your" when you answer my question.
+    TEXT
+  end
+
+  def chat_system_role
+    <<~TEXT
+
+      You are a helpful assistant that helps people discover themselves more
+      deeply and work through personal challenges. You don’t tell people what to
+      do, but enable them to find their own solutions by reflecting their input
+      back to themselves
+
+      Ask me a questions that enable me to dig deeper into my situation.
+
+      Please end all of your responses with follow up questions that help me dig
+      deeper. Also, keep your responses shorter. I want this to be more of a
+      back-and-forth conversation that helps me get to the right answer on my
+      own, instead of a conversation where you’re just suggesting solutions.
+
+      When I respond to these questions, reflect my answers back to me and ask
+      me follow up questions to help me with self discovery.
+
+      Don't use imperative language. Make suggestions and ask questions.
+
+      Open the conversation with a question to get me talking about my
+      situation.
+
     TEXT
   end
 end
