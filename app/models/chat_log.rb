@@ -60,8 +60,15 @@ class ChatLog < ApplicationRecord
   end
 
   def fetch_assistant_response
-    new_assistant_response = FetchChatCompletion.run(conversation_entries_for_assistant_request)
+    new_assistant_response = FetchChatCompletion.run(
+      conversation_entries_for_assistant_request,
+      model: model_for_kind
+    )
     add_assistant_response(new_assistant_response)
+  end
+
+  def model_for_kind
+    question? ? FetchChatCompletion::Models::GPT_4_TURBO_PREVIEW : FetchChatCompletion::Models::GPT_3_5_TURBO
   end
 
   def init_system_role
