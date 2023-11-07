@@ -8,26 +8,24 @@ class FetchJournalEntryRelationshipAnalysis
   end
 
   def run
-    client = OpenAI::Client.new
-    response = client.completions(parameters: completion_params)
-    raw_text = response.dig("choices", 0, "text")
-    JSON.parse(raw_text, symbolize_names: true)
+    raw_text = FetchChatCompletion.run(
+      conversation_entries,
+      model: FetchChatCompletion::Models::GPT_4_TURBO_PREVIEW,
+      response_type: "json_object"
+    )
+
+    JSON.parse(raw_text, symbolize_names: true)[:people]
   end
 
   private
 
   attr_reader :journal_entry
 
-  def completion_params
-    {
-      max_tokens: 1000,
-      model: "text-davinci-003",
-      prompt:,
-      temperature: 0
-    }
+  def conversation_entries
+    [{ role: "user", content: analysis_instruction_text }]
   end
 
-  def prompt
+  def analysis_instruction_text
     <<~PROMPT
       #{journal_entry.content}
 
@@ -38,7 +36,16 @@ class FetchJournalEntryRelationshipAnalysis
       describe overall sentiment and my relationship to them in the context of
       the entry. Is our relationship improving? Changing? Static? You may infer
       my relationship to them if you are familiar with the name given or leave
-      it out if you can't tell. You can only include valid JSON in your response.
+      it out if you can't tell. Refer to the writer exclusively as "you". You
+      can only include valid JSON in your response.
+
+      {
+        "people": [
+          { "name": "Person Name", "summary": "Some summary of my relationship to this person" },
+          { "name": "Other Person Name", "summary": "Some summary of my relationship to this person" },
+        ]
+      }
+
     PROMPT
   end
 end

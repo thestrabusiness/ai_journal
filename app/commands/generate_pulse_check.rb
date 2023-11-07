@@ -6,7 +6,8 @@ class GeneratePulseCheck
   def run
     raw_response = FetchChatCompletion.run(
       [{ role: "user", content: prompt_text }],
-      model: FetchChatCompletion::Models::GPT_4
+      model: FetchChatCompletion::Models::GPT_4_TURBO_PREVIEW,
+      response_type: "json_object"
     )
 
     json = JSON.parse(raw_response, symbolize_names: true)
