@@ -8,13 +8,14 @@ class GenerateAiRelationshipSummary
   end
 
   def run
-    client = OpenAI::Client.new
-    response = client.completions(parameters: completion_params)
-    response_text = response.dig("choices", 0, "text")
-    embeddings = FetchEmbeddings.run(response_text)
+    response = FetchChatCompletion.run(
+      [{ role: "user", content: prompt }],
+      model: FetchChatCompletion::Models::GPT_4_TURBO_PREVIEW
+    )
+    embeddings = FetchEmbeddings.run(response)
 
     {
-      content: response_text,
+      content: response,
       embedding: embeddings.first[:embedding]
     }
   end
@@ -22,15 +23,6 @@ class GenerateAiRelationshipSummary
   private
 
   attr_reader :relationship
-
-  def completion_params
-    {
-      max_tokens: 1000,
-      model: "text-davinci-003",
-      prompt:,
-      temperature: 0
-    }
-  end
 
   def recent_summary_content
     relationship
