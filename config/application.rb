@@ -20,6 +20,10 @@ Bundler.require(*Rails.groups)
 
 module AiJournal
   class Application < Rails::Application
+    # There seems to be a bug in turbo-rails that causes an issue when ActionCable is not loaded.
+    # This is a workaround to prevent ActionCable from being eager loaded when turbo-rails is loaded.
+    Rails.autoloaders.once.do_not_eager_load("#{Turbo::Engine.root}/app/channels")
+
     config.generators.system_tests = nil
     config.active_storage.service = :local
     config.time_zone = "Eastern Time (US & Canada)"
