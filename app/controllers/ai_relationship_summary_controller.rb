@@ -1,6 +1,6 @@
-class AiRelationshipSummaryController < ApplicationController
+class AiRelationshipSummaryController < AuthenticatedController
   def create
-    @relationship = Relationship.find(params[:relationship_id])
+    @relationship = current_user.relationships.find(params[:relationship_id])
 
     relationship_summary_params = GenerateAiRelationshipSummary
       .run(relationship: @relationship)

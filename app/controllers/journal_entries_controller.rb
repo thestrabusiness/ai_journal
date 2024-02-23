@@ -1,9 +1,9 @@
-class JournalEntriesController < ApplicationController
+class JournalEntriesController < AuthenticatedController
   before_action :set_journal_entry, only: %i[show edit update destroy]
 
   # GET /journal_entries
   def index
-    @journal_entries = JournalEntry.with_all_rich_text.order(created_at: :desc)
+    @journal_entries = current_user.journal_entries.with_all_rich_text.order(created_at: :desc)
   end
 
   # GET /journal_entries/1
@@ -11,7 +11,7 @@ class JournalEntriesController < ApplicationController
 
   # GET /journal_entries/new
   def new
-    @journal_entry = JournalEntry.new
+    @journal_entry = current_user.journal_entries.new
   end
 
   # GET /journal_entries/1/edit
@@ -19,7 +19,7 @@ class JournalEntriesController < ApplicationController
 
   # POST /journal_entries
   def create
-    @journal_entry = JournalEntry.new(journal_entry_params)
+    @journal_entry = current_user.journal_entries.new(journal_entry_params)
 
     if @journal_entry.save
       redirect_to @journal_entry, notice: "Journal entry was successfully created."
@@ -46,7 +46,7 @@ class JournalEntriesController < ApplicationController
   private
 
   def set_journal_entry
-    @journal_entry = JournalEntry.find(params[:id])
+    @journal_entry = current_user.journal_entries.find(params[:id])
   end
 
   def journal_entry_params

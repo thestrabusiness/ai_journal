@@ -1,4 +1,5 @@
 class PulseCheck < ApplicationRecord
-  validates :summary, presence: true
-  validates :core_value_scores, presence: true
+  belongs_to :user
+
+  validates :core_value_scores, :summary, :user, presence: true
 end

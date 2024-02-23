@@ -1,6 +1,7 @@
 class ChatLog < ApplicationRecord
-  belongs_to :journal_entry, optional: true
+  belongs_to :user
 
+  validates :user, presence: true
   validate :validate_conversation_entries_format
 
   after_initialize :init_system_role, if: :new_record?

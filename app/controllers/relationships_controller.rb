@@ -1,11 +1,11 @@
-class RelationshipsController < ApplicationController
+class RelationshipsController < AuthenticatedController
   def index
     @relationships = fetch_relationships
     @query = query
   end
 
   def show
-    @relationship = Relationship.find(params[:id])
+    @relationship = current_user.relationships.find(params[:id])
     @relationship_summaries = @relationship
       .relationship_summaries
       .with_all_rich_text
@@ -16,7 +16,7 @@ class RelationshipsController < ApplicationController
   private
 
   def fetch_relationships
-    scope = Relationship.includes(:relationship_summaries)
+    scope = current_user.relationships.includes(:relationship_summaries)
 
     if query.present?
       scope.where("name ILIKE ?", "%#{query}%")

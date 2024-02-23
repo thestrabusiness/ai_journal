@@ -69,17 +69,35 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    argon2 (2.3.0)
+      ffi (~> 1.15)
+      ffi-compiler (~> 1.0)
+    bcrypt (3.1.20)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    clearance (2.6.2)
+      actionmailer (>= 5.0)
+      activemodel (>= 5.0)
+      activerecord (>= 5.0)
+      argon2 (~> 2.0, >= 2.0.2)
+      bcrypt (>= 3.1.1)
+      email_validator (~> 2.0)
+      railties (>= 5.0)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
     debug (1.7.2)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    email_validator (2.2.4)
+      activemodel
     erubi (1.12.0)
+    ffi (1.16.3)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     globalid (1.1.0)
       activesupport (>= 5.0)
     httparty (0.21.0)
@@ -202,6 +220,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgres_enum
   bootsnap
+  clearance (~> 2.6)
   debug
   importmap-rails
   neighbor

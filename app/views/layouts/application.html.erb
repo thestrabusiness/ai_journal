@@ -20,16 +20,20 @@
       </div>
     <% end %>
     <main class="flex flex-col-reverse sm:flex-row h-screen sm:h-full items-start">
-      <nav class="nav-bar">
-        <%= render "nav_link", path: root_path, icon_name: "edit-3" %>
-        <%= render "nav_link", path: journal_entries_path, icon_name: "book-open" %>
-        <%= render "nav_link", path: relationships_path, icon_name: "users" %>
-        <%= render "nav_link", path: questions_path, icon_name: "search" %>
-        <%= render "nav_link", path: core_values_path, icon_name: "heart" %>
-        <%= render "nav_link", path: pulse_check_path, icon_name: "activity" %>
-      </nav>
+      <% if signed_in? %>
+        <nav class="nav-bar">
+          <%= render "nav_link", path: signed_in_root_path, icon_name: "edit-3" %>
+          <%= render "nav_link", path: journal_entries_path, icon_name: "book-open" %>
+          <%= render "nav_link", path: relationships_path, icon_name: "users" %>
+          <%= render "nav_link", path: questions_path, icon_name: "search" %>
+          <%= render "nav_link", path: core_values_path, icon_name: "heart" %>
+          <%= render "nav_link", path: pulse_check_path, icon_name: "activity" %>
+        </nav>
+      <% end %>
       <%= yield %>
-      <%= render "chat_logs/sidebar" %>
+      <% if signed_in? %>
+        <%= render "chat_logs/sidebar" %>
+      <% end %>
     </main>
   </body>
 </html>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_220330) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_23_020105) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -60,11 +60,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_220330) do
 
   create_table "chat_logs", force: :cascade do |t|
     t.jsonb "conversation_entries", default: [], null: false
-    t.bigint "journal_entry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.enum "kind", default: "chat", null: false, enum_type: "chat_log_kinds"
-    t.index ["journal_entry_id"], name: "index_chat_logs_on_journal_entry_id"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_chat_logs_on_user_id"
   end
 
   create_table "core_values", force: :cascade do |t|
@@ -72,6 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_220330) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_core_values_on_user_id"
   end
 
   create_table "journal_entries", force: :cascade do |t|
@@ -79,6 +81,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_220330) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "analysis"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_journal_entries_on_user_id"
   end
 
   create_table "journal_entries_relationships", force: :cascade do |t|
@@ -105,6 +109,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_220330) do
     t.jsonb "core_value_scores", default: [], null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_pulse_checks_on_user_id"
   end
 
   create_table "relationship_summaries", force: :cascade do |t|
@@ -122,14 +128,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_220330) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["name"], name: "index_relationships_on_name"
+    t.index ["user_id"], name: "index_relationships_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email", null: false
+    t.string "encrypted_password", limit: 128, null: false
+    t.string "confirmation_token", limit: 128
+    t.string "remember_token", limit: 128, null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "chat_logs", "journal_entries"
+  add_foreign_key "chat_logs", "users"
+  add_foreign_key "core_values", "users"
+  add_foreign_key "journal_entries", "users"
   add_foreign_key "journal_entries_relationships", "journal_entries"
   add_foreign_key "journal_entries_relationships", "relationships"
   add_foreign_key "journal_entry_embeddings", "journal_entries"
+  add_foreign_key "pulse_checks", "users"
   add_foreign_key "relationship_summaries", "relationships"
+  add_foreign_key "relationships", "users"
 end

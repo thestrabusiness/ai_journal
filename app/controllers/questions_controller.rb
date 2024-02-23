@@ -1,10 +1,10 @@
-class QuestionsController < ApplicationController
+class QuestionsController < AuthenticatedController
   def show
-    @questions = ChatLog.question.order("created_at DESC")
+    @questions = current_user.chat_logs.question.order("created_at DESC")
   end
 
   def create
-    @question = ChatLog.new(kind: "question")
+    @question = current_user.chat_logs.new(kind: "question")
     @question.add_user_entry(question_params[:content], context)
     @question.save!
 
@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = ChatLog.find(params[:id])
+    @question = current_user.chat_logs.find(params[:id])
     @question.destroy!
 
     respond_to do |format|
@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
 
   def context
     query_embedding = FetchEmbeddings.run(question_params[:content]).first[:embedding]
-    entries = JournalEntry.matching_query(query_embedding).first(5)
+    entries = current_user.journal_entries.matching_query(query_embedding).first(5)
     context_string = "Here are some related journal entries:\n\n"
     entries.each do |entry|
       context_string += entry.display_title

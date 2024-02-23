@@ -1,10 +1,10 @@
-class CoreValuesController < ApplicationController
+class CoreValuesController < AuthenticatedController
   def index
-    @core_values = CoreValue.all
+    @core_values = current_user.core_values.all
   end
 
   def create
-    @core_value = CoreValue.new(core_value_params)
+    @core_value = current_user.core_values.new(core_value_params)
     if @core_value.save
       respond_to do |format|
         format.turbo_stream
@@ -16,7 +16,7 @@ class CoreValuesController < ApplicationController
   end
 
   def destroy
-    @core_value = CoreValue.find(params[:id])
+    @core_value = current_user.core_values.find(params[:id])
     return unless @core_value.destroy
 
     respond_to do |format|

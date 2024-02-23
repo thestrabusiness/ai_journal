@@ -1,6 +1,6 @@
-class JournalEntryAnalysisController < ApplicationController
+class JournalEntryAnalysisController < AuthenticatedController
   def create
-    @journal_entry = JournalEntry.find(params[:journal_entry_id])
+    @journal_entry = current_user.journal_entries.find(params[:journal_entry_id])
     @journal_entry.analyze!
 
     if @journal_entry.persisted?

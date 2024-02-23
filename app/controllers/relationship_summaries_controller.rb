@@ -1,11 +1,11 @@
-class RelationshipSummariesController < ApplicationController
+class RelationshipSummariesController < AuthenticatedController
   def new
-    @relationship = Relationship.find(params[:relationship_id])
+    @relationship = current_user.relationships.find(params[:relationship_id])
     @relationship_summary = RelationshipSummary.new
   end
 
   def create
-    @relationship = Relationship.find(params[:relationship_id])
+    @relationship = current_user.relatinoships.find(params[:relationship_id])
     @relationship_summary = @relationship
       .relationship_summaries
       .new(relationship_summary_params)

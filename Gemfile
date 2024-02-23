@@ -5,6 +5,7 @@ ruby File.read(".ruby-version").strip
 
 gem "activerecord-postgres_enum"
 gem "bootsnap", require: false
+gem "clearance", "~> 2.6"
 gem "importmap-rails"
 gem "neighbor"
 gem "pg", "~> 1.1"

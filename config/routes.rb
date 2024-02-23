@@ -13,5 +13,12 @@ Rails.application.routes.draw do
   end
   resource :questions, only: %i[create show]
   resources :questions, only: :destroy
-  root "journal_entries#new"
+
+  constraints Clearance::Constraints::SignedIn.new do
+    root "journal_entries#new", as: :signed_in_root
+  end
+
+  constraints Clearance::Constraints::SignedOut.new do
+    root "clearance/sessions#new", as: :signed_out_root
+  end
 end

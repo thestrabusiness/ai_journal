@@ -1,3 +1,5 @@
 class CoreValue < ApplicationRecord
-  validates :name, :description, presence: true
+  belongs_to :user
+
+  validates :description, :user, :name, presence: true
 end

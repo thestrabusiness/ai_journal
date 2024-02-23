@@ -1,6 +1,10 @@
 class GeneratePulseCheck
-  def self.run!
-    new.run
+  def self.run!(user)
+    new(user).run
+  end
+
+  def initialize(user)
+    @user = user
   end
 
   def run
@@ -12,7 +16,7 @@ class GeneratePulseCheck
 
     json = JSON.parse(raw_response, symbolize_names: true)
 
-    PulseCheck.create!(
+    user.pulse_checks.create!(
       summary: json[:summary],
       core_value_scores: json[:scores]
     )
@@ -20,12 +24,14 @@ class GeneratePulseCheck
 
   private
 
+  attr_reader :user
+
   def latest_journal_entries
-    JournalEntry.with_all_rich_text.last(10)
+    user.journal_entries.with_all_rich_text.last(10)
   end
 
   def core_value_text
-    CoreValue.find_each.map do |core_value|
+    user.core_values.find_each.map do |core_value|
       "#{core_value.name}: #{core_value.description}"
     end.join("\n")
   end
