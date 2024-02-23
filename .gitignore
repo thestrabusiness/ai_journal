@@ -18,8 +18,8 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
-
 /public/assets
+/scratch/*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
