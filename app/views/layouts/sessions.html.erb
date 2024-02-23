@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <%= render "layouts/head" %>
+  <body class="sm:fixed sm:inset-0 bg-gray-100 <%= "animate-slide-down-up" if notice.present? %>">
+    <main class="flex flex-col-reverse sm:flex-row h-screen sm:h-full items-start">
+      <%= render "layouts/notice" %>
+      <%= yield %>
+    </main>
+  </body>
+</html>

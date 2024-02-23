@@ -1,0 +1,11 @@
+<div class="session-container">
+  <div class="white-panel h-full w-full">
+    <%= form_for :session,
+      url: sessions_path,
+      class: "flex flex-col h-full items-center justify-center" do |form| %>
+        <%= form.email_field :email, placeholder: "Email", class: "w-full xs:w-auto mb-5 rounded-md text-lg" %>
+        <%= form.password_field :password, placeholder: "Password", class: "w-full xs:w-auto mb-5 rounded-md text-lg" %>
+        <%= form.submit class: "submit-button w-full xs:w-auto" %>
+    <% end %>
+  </div>
+</div>

@@ -27,6 +27,7 @@ module.exports = {
         "ai-menu": "40rem",
       },
       screens: {
+        xs: "512px",
         "mobile-portrait": {
           raw: "(max-height: 500px)",
         },
