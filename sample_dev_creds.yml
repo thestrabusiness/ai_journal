@@ -1,7 +1,6 @@
 open_ai:
   access_token: your-access_token
   organization_id: your-org-id
-http_basic_auth:
-  name: pickausername
-  password: pickapassword
+init_email:  pickanemail@example.com
+init_password: pickapassword
 
