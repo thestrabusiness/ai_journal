@@ -11,6 +11,7 @@
         <%= render "nav_link", path: questions_path, icon_name: "search" %>
         <%= render "nav_link", path: core_values_path, icon_name: "heart" %>
         <%= render "nav_link", path: pulse_check_path, icon_name: "activity" %>
+        <%= render "nav_link", path: sign_out_path, method: "delete", icon_name: "log-out" %>
       </nav>
       <%= yield %>
       <%= render "chat_logs/sidebar" %>
