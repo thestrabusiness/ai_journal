@@ -3,7 +3,6 @@ class JournalEntry < ApplicationRecord
 
   belongs_to :user
   has_and_belongs_to_many :relationships
-  has_many :chat_logs, dependent: :destroy
   has_many :embeddings, dependent: :destroy, class_name: "JournalEntryEmbedding"
   has_many :relationship_summaries
 
