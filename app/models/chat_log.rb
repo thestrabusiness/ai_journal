@@ -69,7 +69,7 @@ class ChatLog < ApplicationRecord
   end
 
   def model_for_kind
-    question? ? FetchChatCompletion::Models::GPT_4_TURBO_PREVIEW : FetchChatCompletion::Models::GPT_3_5_TURBO
+    question? ? FetchChatCompletion::Models::GPT_4_TURBO : FetchChatCompletion::Models::GPT_4_O_MINI
   end
 
   def init_system_role

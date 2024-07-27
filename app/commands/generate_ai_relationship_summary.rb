@@ -10,7 +10,7 @@ class GenerateAiRelationshipSummary
   def run
     response = FetchChatCompletion.run(
       [{ role: "user", content: prompt }],
-      model: FetchChatCompletion::Models::GPT_4_TURBO_PREVIEW
+      model: FetchChatCompletion::Models::GPT_4_TURBO
     )
     embeddings = FetchEmbeddings.run(response)
 

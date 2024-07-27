@@ -10,7 +10,7 @@ class FetchJournalEntryAnalysis
   def run
     FetchChatCompletion.run(
       conversation_entries,
-      model: FetchChatCompletion::Models::GPT_4_TURBO_PREVIEW
+      model: FetchChatCompletion::Models::GPT_4_TURBO
     )
   end
 

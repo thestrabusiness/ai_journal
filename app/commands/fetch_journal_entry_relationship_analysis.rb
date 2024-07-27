@@ -10,7 +10,7 @@ class FetchJournalEntryRelationshipAnalysis
   def run
     raw_text = FetchChatCompletion.run(
       conversation_entries,
-      model: FetchChatCompletion::Models::GPT_4_TURBO_PREVIEW,
+      model: FetchChatCompletion::Models::GPT_4_TURBO,
       response_type: "json_object"
     )
 

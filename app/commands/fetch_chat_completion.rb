@@ -1,8 +1,8 @@
 class FetchChatCompletion
   class Models
-    GPT_3_5_TURBO = "gpt-3.5-turbo-1106".freeze
     GPT_4 = "gpt-4".freeze
-    GPT_4_TURBO_PREVIEW = "gpt-4-1106-preview".freeze
+    GPT_4_TURBO = "gpt-4-turbo".freeze
+    GPT_4_O_MINI = "gpt-4o-mini".freeze
   end
 
   RESPONSE_TYPES = %w[text json_object].freeze
@@ -14,10 +14,16 @@ class FetchChatCompletion
 
     return if RESPONSE_TYPES.include?(response_type)
 
+    unless Models.constants.map { |c| Models.const_get(c) }.include?(model)
+      Rails.logger.warn "Invalid model, must be one of #{Models.constants.map { |c| Models.const_get(c) }}"
+      Rails.logger.warn "Defaulting to #{Models::GPT_4_O_MINI}"
+      @model = Models::GPT_4_O_MINI
+    end
+
     raise ArgumentError, "Invalid response type, must be one of #{RESPONSE_TYPES}"
   end
 
-  def self.run(current_conversation, model: Models::GPT_3_5_TURBO, response_type: "text")
+  def self.run(current_conversation, model: Models::GPT_4_O_MINI, response_type: "text")
     new(current_conversation, model:, response_type:).run
   end
 
